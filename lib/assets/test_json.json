@@ -1,0 +1,60 @@
+[{
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "age": 25,
+    "phone": "123-456-7890",
+    "location": [40.7128, -74.0060],
+    "address": {
+      "city": "New York",
+      "zipcode": "10001"
+    }
+  },
+{
+  "id": 2,
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "age": 30,
+  "phone": "987-654-3210",
+  "location": [34.0522, -118.2437],
+  "address": {
+    "city": "Los Angeles",
+    "zipcode": "90001"
+  }
+},
+{
+  "id": 3,
+  "name": "Alice Johnson",
+  "email": "alice.johnson@example.com",
+  "age": 28,
+  "phone": "555-123-4567",
+  "location": [41.8781, -87.6298],
+  "address": {
+    "city": "Chicago",
+    "zipcode": "60601"
+  }
+},
+{
+  "id": 4,
+  "name": "Bob Brown",
+  "email": "bob.brown@example.com",
+  "age": 35,
+  "phone": "444-555-6666",
+  "location": [29.7604, -95.3698],
+  "address": {
+    "city": "Houston",
+    "zipcode": "77001"
+  }
+},
+{
+  "id": 5,
+  "name": "Charlie Davis",
+  "email": "charlie.davis@example.com",
+  "age": 22,
+  "phone": "333-222-1111",
+  "location": [33.4484, -112.0740],
+  "address": {
+    "city": "Phoenix",
+    "zipcode": "85001"
+  }
+}]

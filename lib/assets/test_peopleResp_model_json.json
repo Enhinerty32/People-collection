@@ -1,0 +1,206 @@
+{"id": 0,
+"general_information": {
+    "full_name": "Full Name",
+    "description": "Description",
+    "nickname": "Nickname",
+    "mail":"asdfasd@asdfasd.com",
+    "blood_type": "tipo A",
+    "birth_date": "YYYY-MM-DD",
+    "address_location": ["log", "lat"],
+    "workplace": "Workplace Location",
+    "close_relationships": {
+      "family": ["Family Member 1", "Family Member 2"],
+      "friends": ["Friend 1", "Friend 2"],
+      "enemies": ["Enemy 1"]
+    },
+    "personal_history": ["education", "work", "etc"],
+    "gender": "Gender",
+    "languages_spoken": ["Language 1", "Language 2"],
+    "phones": ["Phone 1", "Phone 2"],
+    "social_media": ["Social Media 1", "Social Media 2"],
+    "connection_level": 0
+  },  "interests": {
+    "mystical_interests": ["astrology", "tarot", "paranormal_research"],
+    "hobby_areas": ["art", "sports", "technology"],
+    "musical_preferences": ["classical", "rock", "pop"],
+    "cinematic_themes": ["action", "drama", "sci-fi"],
+    "deep_interests": ["philosophy", "minimalism", "sci-fi"]
+  },
+  "touch_sensitive_body": {
+    "neck": 1,
+    "shoulder": 2,
+    "chest": 3,
+    "abdomen": 4,
+    "elbow": 5,
+    "arm": 6,
+    "hands": 7,
+    "thigh": 8,
+    "knee": 9,
+    "leg": 10,
+    "feet": 11,
+    "upper_back": 12,
+    "lower_back": 13,
+    "glutes": 14,
+    "ear": 15,
+    "chin": 16,
+    "forehead": 17,
+    "cheek": 18,
+    "hair": 10,
+    "mouth": 19,
+    "nose": 20
+  }
+,
+  "psychological_analysis":{
+    "mbti": {
+      "extraversion>introversion": 0,
+      "sensing>intuition": 0,
+      "thinking>feeling": 0,
+      "judging>perceiving": 0
+    },
+    
+    "enneagram": {
+      "perfectionist": 0,
+      "helper": 0,
+      "achiever": 0,
+      "individualist": 0,
+      "investigator": 0,
+      "loyalist": 0,
+      "enthusiast": 0,
+      "challenger": 0,
+      "peacemaker": 0
+    },
+    
+    "big_five": {
+      "openness": [2, 3, 3, 5, 5, 5, 4, 4, 3],
+      "conscientiousness": [2, 3, 3, 5, 5, 5, 4, 4, 3],
+      "extraversion": [2, 3, 3, 5, 5, 5, 4, 4, 3],
+      "agreeableness": [2, 3, 3, 5, 5, 5, 4, 4, 3],
+      "neuroticism": [2, 3, 3, 5, 5, 5, 4, 4, 3]
+    }
+  },
+  "diagnosed_data": {
+    "weight": 70,
+    "diagnosed_conditions": ["Cancer", "Diabetes", "Hypertension", "Obesity", "Migraines"],
+    "diagnosis": "Physical",
+    "sleep_pattern": {
+      "wake_up": "2025-01-01T07:30:00",
+      "sleep_time": "2025-01-01T23:30:00",
+      "sleep_duration": 8,
+      "energy_peak": "2025-01-01T12:00:00",
+      "tiredness_peak": "2025-01-01T16:00:00"
+    },
+    "menstrual_cycle": {
+      "start": "2025-01-01",
+      "blood_duration": 5,
+      "cycle_length": 28
+    }
+  },
+"contact_about": {
+      "verbal_contextual_style": {
+        "options": ["logical", "emotional"],
+        "selected": "logical"
+      },
+      "language_complexity": {
+        "options": ["simple", "technical"],
+        "selected": "simple"
+      },
+      "discourse_format": {
+        "options": ["narrative", "direct"],
+        "selected": "narrative"
+      },
+      "response_in_conflicts": {
+        "options": ["defensive", "reflective", "evasive"],
+        "selected": "reflective"
+      },
+      "word_gesture_sync": {
+        "options": ["high", "low"],
+        "selected": "high"
+      },
+      "posture_changes": {
+        "options": ["relaxed", "tense"],
+        "selected": "relaxed"
+      },
+      "spontaneous_microexpressions": {
+        "options": ["happiness", "surprise", "disgust"],
+        "selected": "happiness"
+      },
+      "personal_space_respect": {
+        "options": ["yes", "no"],
+        "selected": "yes"
+      },
+      "digital_interaction_formality": {
+        "options": ["formal", "casual"],
+        "selected": "casual"
+      },
+      "written_emotional_expression": {
+        "options": ["emoji", "words"],
+        "selected": "words"
+      },
+      "response_speed": {
+        "options": ["fast", "medium", "slow"],
+        "selected": "medium"
+      },
+      "interaction_rhythm_style": {
+        "options": ["continuous", "paused"],
+        "selected": "continuous"
+      },
+      "writing_care": {
+        "options": ["detailed", "careless"],
+        "selected": "detailed"
+      },
+      "message_length": {
+        "options": ["brief", "detailed"],
+        "selected": "brief"
+      },
+      "visual_contact": {
+        "options": ["frequent", "sporadic", "none"],
+        "selected": "frequent"
+      },
+      "physical_proximity": {
+        "options": ["close", "moderate", "distant"],
+        "selected": "moderate"
+      },
+      "voice_tone": {
+        "options": ["friendly", "neutral", "aggressive"],
+        "selected": "friendly"
+      },
+      "intonation": {
+        "options": ["monotone", "energetic", "varied"],
+        "selected": "varied"
+      },
+      "gesticulation": {
+        "options": ["expansive", "moderate", "limited"],
+        "selected": "moderate"
+      },
+      "general_attitude": {
+        "options": ["positive", "negative", "neutral"],
+        "selected": "positive"
+      },
+      "emotional_connection": {
+        "options": ["high", "medium", "low"],
+        "selected": "high"
+      },
+      "interruptions": {
+        "options": ["frequent", "occasional", "none"],
+        "selected": "occasional"
+      },
+      "appearance_care": {
+        "options": ["detailed", "moderate", "careless"],
+        "selected": "detailed"
+      },
+      "listening_skills": {
+        "options": ["attentive", "partial", "disinterested"],
+        "selected": "attentive"
+      },
+      "expression_clarity": {
+        "options": ["very clear", "moderately clear", "confusing"],
+        "selected": "very clear"
+      },
+      "oral_communication_formality_level": {
+        "options": ["formal", "casual", "informal"],
+        "selected": "casual"
+      }
+     
+   
+    }
+}
