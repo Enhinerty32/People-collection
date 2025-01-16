@@ -4,10 +4,10 @@ class PersonResp {
     int id;
     GeneralInformation generalInformation;
     Interests interests;
-    Map<String, int> touchSensitiveBody;
+    TouchSensitiveBody touchSensitiveBody;
     PsychologicalAnalysis psychologicalAnalysis;
     DiagnosedData diagnosedData;
-    Map<String, ContactAbout> contactAbout;
+    ContactAbout contactAbout;
 
     PersonResp({
         required this.id,
@@ -27,30 +27,78 @@ class PersonResp {
         id: json["id"],
         generalInformation: GeneralInformation.fromJson(json["general_information"]),
         interests: Interests.fromJson(json["interests"]),
-        touchSensitiveBody: Map.from(json["touch_sensitive_body"]).map((k, v) => MapEntry<String, int>(k, v)),
+        touchSensitiveBody: TouchSensitiveBody.fromJson(json["touch_sensitive_body"]),
         psychologicalAnalysis: PsychologicalAnalysis.fromJson(json["psychological_analysis"]),
         diagnosedData: DiagnosedData.fromJson(json["diagnosed_data"]),
-        contactAbout: Map.from(json["contact_about"]).map((k, v) => MapEntry<String, ContactAbout>(k, ContactAbout.fromJson(v))),
+        contactAbout: ContactAbout.fromJson(json["contact_about"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "general_information": generalInformation.toJson(),
         "interests": interests.toJson(),
-        "touch_sensitive_body": Map.from(touchSensitiveBody).map((k, v) => MapEntry<String, dynamic>(k, v)),
+        "touch_sensitive_body": touchSensitiveBody.toJson(),
         "psychological_analysis": psychologicalAnalysis.toJson(),
         "diagnosed_data": diagnosedData.toJson(),
-        "contact_about": Map.from(contactAbout).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "contact_about": contactAbout.toJson(),
     };
 }
 
 class ContactAbout {
-    List<String> options;
-    String selected;
+    AppearanceCare verbalContextualStyle;
+    AppearanceCare languageComplexity;
+    AppearanceCare discourseFormat;
+    AppearanceCare responseInConflicts;
+    AppearanceCare wordGestureSync;
+    AppearanceCare postureChanges;
+    AppearanceCare spontaneousMicroexpressions;
+    AppearanceCare personalSpaceRespect;
+    AppearanceCare digitalInteractionFormality;
+    AppearanceCare writtenEmotionalExpression;
+    AppearanceCare responseSpeed;
+    AppearanceCare interactionRhythmStyle;
+    AppearanceCare writingCare;
+    AppearanceCare messageLength;
+    AppearanceCare visualContact;
+    AppearanceCare physicalProximity;
+    AppearanceCare voiceTone;
+    AppearanceCare intonation;
+    AppearanceCare gesticulation;
+    AppearanceCare generalAttitude;
+    AppearanceCare emotionalConnection;
+    AppearanceCare interruptions;
+    AppearanceCare appearanceCare;
+    AppearanceCare listeningSkills;
+    AppearanceCare expressionClarity;
+    AppearanceCare oralCommunicationFormalityLevel;
 
     ContactAbout({
-        required this.options,
-        required this.selected,
+        required this.verbalContextualStyle,
+        required this.languageComplexity,
+        required this.discourseFormat,
+        required this.responseInConflicts,
+        required this.wordGestureSync,
+        required this.postureChanges,
+        required this.spontaneousMicroexpressions,
+        required this.personalSpaceRespect,
+        required this.digitalInteractionFormality,
+        required this.writtenEmotionalExpression,
+        required this.responseSpeed,
+        required this.interactionRhythmStyle,
+        required this.writingCare,
+        required this.messageLength,
+        required this.visualContact,
+        required this.physicalProximity,
+        required this.voiceTone,
+        required this.intonation,
+        required this.gesticulation,
+        required this.generalAttitude,
+        required this.emotionalConnection,
+        required this.interruptions,
+        required this.appearanceCare,
+        required this.listeningSkills,
+        required this.expressionClarity,
+        required this.oralCommunicationFormalityLevel,
     });
 
     factory ContactAbout.fromRawJson(String str) => ContactAbout.fromJson(json.decode(str));
@@ -58,6 +106,78 @@ class ContactAbout {
     String toRawJson() => json.encode(toJson());
 
     factory ContactAbout.fromJson(Map<String, dynamic> json) => ContactAbout(
+        verbalContextualStyle: AppearanceCare.fromJson(json["verbal_contextual_style"]),
+        languageComplexity: AppearanceCare.fromJson(json["language_complexity"]),
+        discourseFormat: AppearanceCare.fromJson(json["discourse_format"]),
+        responseInConflicts: AppearanceCare.fromJson(json["response_in_conflicts"]),
+        wordGestureSync: AppearanceCare.fromJson(json["word_gesture_sync"]),
+        postureChanges: AppearanceCare.fromJson(json["posture_changes"]),
+        spontaneousMicroexpressions: AppearanceCare.fromJson(json["spontaneous_microexpressions"]),
+        personalSpaceRespect: AppearanceCare.fromJson(json["personal_space_respect"]),
+        digitalInteractionFormality: AppearanceCare.fromJson(json["digital_interaction_formality"]),
+        writtenEmotionalExpression: AppearanceCare.fromJson(json["written_emotional_expression"]),
+        responseSpeed: AppearanceCare.fromJson(json["response_speed"]),
+        interactionRhythmStyle: AppearanceCare.fromJson(json["interaction_rhythm_style"]),
+        writingCare: AppearanceCare.fromJson(json["writing_care"]),
+        messageLength: AppearanceCare.fromJson(json["message_length"]),
+        visualContact: AppearanceCare.fromJson(json["visual_contact"]),
+        physicalProximity: AppearanceCare.fromJson(json["physical_proximity"]),
+        voiceTone: AppearanceCare.fromJson(json["voice_tone"]),
+        intonation: AppearanceCare.fromJson(json["intonation"]),
+        gesticulation: AppearanceCare.fromJson(json["gesticulation"]),
+        generalAttitude: AppearanceCare.fromJson(json["general_attitude"]),
+        emotionalConnection: AppearanceCare.fromJson(json["emotional_connection"]),
+        interruptions: AppearanceCare.fromJson(json["interruptions"]),
+        appearanceCare: AppearanceCare.fromJson(json["appearance_care"]),
+        listeningSkills: AppearanceCare.fromJson(json["listening_skills"]),
+        expressionClarity: AppearanceCare.fromJson(json["expression_clarity"]),
+        oralCommunicationFormalityLevel: AppearanceCare.fromJson(json["oral_communication_formality_level"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "verbal_contextual_style": verbalContextualStyle.toJson(),
+        "language_complexity": languageComplexity.toJson(),
+        "discourse_format": discourseFormat.toJson(),
+        "response_in_conflicts": responseInConflicts.toJson(),
+        "word_gesture_sync": wordGestureSync.toJson(),
+        "posture_changes": postureChanges.toJson(),
+        "spontaneous_microexpressions": spontaneousMicroexpressions.toJson(),
+        "personal_space_respect": personalSpaceRespect.toJson(),
+        "digital_interaction_formality": digitalInteractionFormality.toJson(),
+        "written_emotional_expression": writtenEmotionalExpression.toJson(),
+        "response_speed": responseSpeed.toJson(),
+        "interaction_rhythm_style": interactionRhythmStyle.toJson(),
+        "writing_care": writingCare.toJson(),
+        "message_length": messageLength.toJson(),
+        "visual_contact": visualContact.toJson(),
+        "physical_proximity": physicalProximity.toJson(),
+        "voice_tone": voiceTone.toJson(),
+        "intonation": intonation.toJson(),
+        "gesticulation": gesticulation.toJson(),
+        "general_attitude": generalAttitude.toJson(),
+        "emotional_connection": emotionalConnection.toJson(),
+        "interruptions": interruptions.toJson(),
+        "appearance_care": appearanceCare.toJson(),
+        "listening_skills": listeningSkills.toJson(),
+        "expression_clarity": expressionClarity.toJson(),
+        "oral_communication_formality_level": oralCommunicationFormalityLevel.toJson(),
+    };
+}
+
+class AppearanceCare {
+    List<String> options;
+    String selected;
+
+    AppearanceCare({
+        required this.options,
+        required this.selected,
+    });
+
+    factory AppearanceCare.fromRawJson(String str) => AppearanceCare.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory AppearanceCare.fromJson(Map<String, dynamic> json) => AppearanceCare(
         options: List<String>.from(json["options"].map((x) => x)),
         selected: json["selected"],
     );
@@ -175,7 +295,7 @@ class GeneralInformation {
     String mail;
     String bloodType;
     String birthDate;
-    String address;
+    List<String> addressLocation;
     String workplace;
     CloseRelationships closeRelationships;
     List<String> personalHistory;
@@ -192,7 +312,7 @@ class GeneralInformation {
         required this.mail,
         required this.bloodType,
         required this.birthDate,
-        required this.address,
+        required this.addressLocation,
         required this.workplace,
         required this.closeRelationships,
         required this.personalHistory,
@@ -214,7 +334,7 @@ class GeneralInformation {
         mail: json["mail"],
         bloodType: json["blood_type"],
         birthDate: json["birth_date"],
-        address: json["address"],
+        addressLocation: List<String>.from(json["address_location"].map((x) => x)),
         workplace: json["workplace"],
         closeRelationships: CloseRelationships.fromJson(json["close_relationships"]),
         personalHistory: List<String>.from(json["personal_history"].map((x) => x)),
@@ -232,7 +352,7 @@ class GeneralInformation {
         "mail": mail,
         "blood_type": bloodType,
         "birth_date": birthDate,
-        "address": address,
+        "address_location": List<dynamic>.from(addressLocation.map((x) => x)),
         "workplace": workplace,
         "close_relationships": closeRelationships.toJson(),
         "personal_history": List<dynamic>.from(personalHistory.map((x) => x)),
@@ -453,5 +573,105 @@ class Mbti {
         "sensing>intuition": sensingIntuition,
         "thinking>feeling": thinkingFeeling,
         "judging>perceiving": judgingPerceiving,
+    };
+}
+
+class TouchSensitiveBody {
+    String neck;
+    int shoulder;
+    int chest;
+    int abdomen;
+    int elbow;
+    int arm;
+    int hands;
+    int thigh;
+    int knee;
+    int leg;
+    int feet;
+    int upperBack;
+    int lowerBack;
+    int glutes;
+    int ear;
+    int chin;
+    int forehead;
+    int cheek;
+    int hair;
+    int mouth;
+    int nose;
+
+    TouchSensitiveBody({
+        required this.neck,
+        required this.shoulder,
+        required this.chest,
+        required this.abdomen,
+        required this.elbow,
+        required this.arm,
+        required this.hands,
+        required this.thigh,
+        required this.knee,
+        required this.leg,
+        required this.feet,
+        required this.upperBack,
+        required this.lowerBack,
+        required this.glutes,
+        required this.ear,
+        required this.chin,
+        required this.forehead,
+        required this.cheek,
+        required this.hair,
+        required this.mouth,
+        required this.nose,
+    });
+
+    factory TouchSensitiveBody.fromRawJson(String str) => TouchSensitiveBody.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory TouchSensitiveBody.fromJson(Map<String, dynamic> json) => TouchSensitiveBody(
+        neck: json["neck"],
+        shoulder: json["shoulder"],
+        chest: json["chest"],
+        abdomen: json["abdomen"],
+        elbow: json["elbow"],
+        arm: json["arm"],
+        hands: json["hands"],
+        thigh: json["thigh"],
+        knee: json["knee"],
+        leg: json["leg"],
+        feet: json["feet"],
+        upperBack: json["upper_back"],
+        lowerBack: json["lower_back"],
+        glutes: json["glutes"],
+        ear: json["ear"],
+        chin: json["chin"],
+        forehead: json["forehead"],
+        cheek: json["cheek"],
+        hair: json["hair"],
+        mouth: json["mouth"],
+        nose: json["nose"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "neck": neck,
+        "shoulder": shoulder,
+        "chest": chest,
+        "abdomen": abdomen,
+        "elbow": elbow,
+        "arm": arm,
+        "hands": hands,
+        "thigh": thigh,
+        "knee": knee,
+        "leg": leg,
+        "feet": feet,
+        "upper_back": upperBack,
+        "lower_back": lowerBack,
+        "glutes": glutes,
+        "ear": ear,
+        "chin": chin,
+        "forehead": forehead,
+        "cheek": cheek,
+        "hair": hair,
+        "mouth": mouth,
+        "nose": nose,
     };
 }

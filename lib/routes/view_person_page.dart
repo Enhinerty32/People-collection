@@ -15,68 +15,62 @@ class ViewPersonPage extends StatelessWidget {
     final PersonResp? person = Get.arguments;
 
     double sizeSpace = 8;
-    return Obx(() => Scaffold(
-          appBar: AppBar(
-            title: Column(
-              children: [
-                Text(
-                  "fullName: Maria antonieta  ",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Column(
+          children: [
+            Text(
+              "fullName: Maria antonieta  ",
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-          ),
-          body: ListView(
-            children: [
-              showProfile(sizeSpace),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Column(
+          ],
+        ),
+      ),
+      body: ListView(
+        children: [
+          showProfile(sizeSpace),
+          Container(
+            margin: EdgeInsets.all(10),
+            child:  Column(
                   children: [
-                    actionDeployWidget(
-                        textTittle: Text('general_information '),
-                        deployWidget: deployGeneralInfo(person: person),
+                    ActionDeployWidget(textTitle:Text('general_information '),
+                        deployWidget: deployGeneralInfo(),
                         boolCtx: viewPersonSettings
                             .general_information_deplegate_value),
-                    actionDeployWidget(
-                        textTittle: Text('interests'),
+                    ActionDeployWidget(textTitle:Text('interests'),
                         deployWidget: deployInterests(),
                         boolCtx: viewPersonSettings.interest_deplegate_value),
-                    actionDeployWidget(
-                        textTittle: Text('touch_sensitive_body'),
+                     ActionDeployWidget(textTitle: Text('touch_sensitive_body'),
                         deployWidget: deployTouchSensitveBody(),
                         boolCtx: viewPersonSettings
                             .touch_sensitive_body_deplegate_value),
-                    actionDeployWidget(
-                        textTittle: Text('psychological_analysis'),
+                  ActionDeployWidget(textTitle:Text('psychological_analysis'),
                         deployWidget: deployPsychological(),
                         boolCtx: viewPersonSettings
                             .psychological_analysis_deplegate_value),
-                    actionDeployWidget(
-                        textTittle: Text('diagnosed_data'),
+                  ActionDeployWidget(textTitle: Text('diagnosed_data'),
                         deployWidget: deployDiagnosedData(),
                         boolCtx:
                             viewPersonSettings.diagnosed_data_deplegate_value),
-                    actionDeployWidget(
-                        textTittle: Text('contact_about'),
+                    ActionDeployWidget(textTitle:Text('contact_about'),
                         deployWidget: deployContactAbout(),
                         boolCtx:
                             viewPersonSettings.contact_about_deplegate_value),
                   ],
                 ),
-              )
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Get.to(EditPersonPage(),
-                  arguments: person, transition: Transition.cupertino);
-            },
-            tooltip: 'Comeback',
-            child: const Icon(Icons.edit),
-          ),
-        ));
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(EditPersonPage(),
+              arguments: person, transition: Transition.cupertino);
+        },
+        tooltip: 'Comeback',
+        child: const Icon(Icons.edit),
+      ),
+    );
   }
 
   Row showProfile(double sizeSpace) {
@@ -159,87 +153,217 @@ class ViewPersonPage extends StatelessWidget {
         // Text("Phones: ${myInfo.phones.join(', ')}"),
         // Text("Social Media: ${myInfo.socialMedia.join(', ')}"),
         // Text("Connection Level: ${myInfo.connectionLevel}"),
-
-        //Periodo de prueba
-        // Desplegar en producción
-        Text("Full Name: Full Name"),
-        Text("Description: Description"),
-        Text("Nickname: Nickname"),
-        Text("Mail: asdfasd@asdfasd.com"),
-        Text("Blood Type: tipo A"),
-        Text("Birth Date: YYYY-MM-DD"),
-        Text("Address Location: log, lat"),
-        Text("Workplace: Workplace Location"),
-        Text("Family: Family Member 1, Family Member 2"),
-        Text("Friends: Friend 1, Friend 2"),
-        Text("Enemies: Enemy 1"),
-        Text("Personal History: education, work, etc"),
-        Text("Gender: Gender"),
-        Text("Languages Spoken: Language 1, Language 2"),
-        Text("Phones: Phone 1, Phone 2"),
-        Text("Social Media: Social Media 1, Social Media 2"),
-        Text("Connection Level: 0"),
+        Text("Full Name: fullName"),
+        Text("Description: description"),
+        Text("Nickname: nickname"),
+        Text("Mail: mail"),
+        Text("Blood Type: bloodType"),
+        Text("Birth Date: birthDate"),
+        Text("Workplace: workplace"),
+        Text("Gender: gender"),
+        Text("Connection Level: .connectionLevel"),
+        Text("Address Location: .address[0]=lat,address[1]=log"),
+        Text("Family: closeRelationships.family"),
+        Text("Friends: closeRelationships.friends"),
+        Text("Enemies: closeRelationships.enemies"),
+        Text("Personal History: personalHistory"),
+        Text("Languages Spoken: languagesSpoken"),
+        Text("Phones: phones"),
+        Text("Social Media: socialMedia"),
       ],
     );
   }
 
   Widget deployInterests({PersonResp? person}) {
-    // final GeneralInformation myInfo = person.generalInformation;
+    // final Interests myInfo = person.interests;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
         // // Desplegar en producción--------------------------------------------
-        Text("deployInterests"),
+        // Text("deployInterests"),
+        // Text("Mystical Interests: ${myInfo.mysticalInterests.join(', ')}"),
+        // Text("Hobby Areas: ${myInfo.hobbyAreas.join(', ')}"),
+        // Text("Musical Preferences: ${myInfo.musicalPreferences.join(', ')}"),
+        // Text("Cinematic Themes: ${myInfo.cinematicThemes.join(', ')}"),
+        // Text("Deep Interests: ${myInfo.deepInterests.join(', ')}"),
+
+        Text("Mystical Interests: mysticalInterests"),
+        Text("Hobby Areas: hobbyAreas"),
+        Text("Musical Preferences: musicalPreferences"),
+        Text("Cinematic Themes: cinematicThemes"),
+        Text("Deep Interests: deepInterests"),
       ],
     );
   }
 
   Widget deployTouchSensitveBody({PersonResp? person}) {
-    // final GeneralInformation myInfo = person.generalInformation;
+    // final TouchSensitiveBody myInfo = person.touchSensitiveBody;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
         // Desplegar en producción--------------------------------------------
-        Text("deployTouchSensitveBody"),
+        // Text("deployTouchSensitveBody"),
+        // Text("Mystical Interests: ${myInfo.neck}"),
+        // Text("Mystical Interests: ${myInfo.shoulder}"),
+        // Text("Mystical Interests: ${myInfo.chest}"),
+        // Text("Mystical Interests: ${myInfo.abdomen}"),
+        // Text("Mystical Interests: ${myInfo.elbow}"),
+        // Text("Mystical Interests: ${myInfo.arm}"),
+        // Text("Mystical Interests: ${myInfo.hands}"),
+        // Text("Mystical Interests: ${myInfo.thigh}"),
+        // Text("Mystical Interests: ${myInfo.knee}"),
+        // Text("Mystical Interests: ${myInfo.leg}"),
+        // Text("Mystical Interests: ${myInfo.feet}"),
+        // Text("Mystical Interests: ${myInfo.upperBack}"),
+        // Text("Mystical Interests: ${myInfo.lowerBack}"),
+        // Text("Mystical Interests: ${myInfo.ear}"),
+        // Text("Mystical Interests: ${myInfo.chin}"),
+        // Text("Mystical Interests: ${myInfo.forehead}"),
+        // Text("Mystical Interests: ${myInfo.cheek}"),
+        // Text("Mystical Interests: ${myInfo.hair}"),
+        // Text("Mystical Interests: ${myInfo.mouth}"),
+        // Text("Mystical Interests: ${myInfo.nose}"),
+
+        Text("Mystical Interests: myInfo.neck"),
+        Text("Mystical Interests: myInfo.shoulder"),
+        Text("Mystical Interests: myInfo.chest"),
+        Text("Mystical Interests: myInfo.abdomen"),
+        Text("Mystical Interests: myInfo.elbow"),
+        Text("Mystical Interests: myInfo.arm"),
+        Text("Mystical Interests: myInfo.hands"),
+        Text("Mystical Interests: myInfo.thigh"),
+        Text("Mystical Interests: myInfo.knee"),
+        Text("Mystical Interests: myInfo.leg"),
+        Text("Mystical Interests: myInfo.feet"),
+        Text("Mystical Interests: myInfo.upperBack"),
+        Text("Mystical Interests: myInfo.lowerBack"),
+        Text("Mystical Interests: myInfo.ear"),
+        Text("Mystical Interests: myInfo.chin"),
+        Text("Mystical Interests: myInfo.forehead"),
+        Text("Mystical Interests: myInfo.cheek"),
+        Text("Mystical Interests: myInfo.hair"),
+        Text("Mystical Interests: myInfo.mouth"),
+        Text("Mystical Interests: myInfo.nose"),
       ],
     );
   }
 
   Widget deployPsychological({PersonResp? person}) {
-    // final GeneralInformation myInfo = person.generalInformation;
+    // final PsychologicalAnalysis myInfo = person.psychologicalAnalysis;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
-        // // Desplegar en producción--------------------------------------------
-        Text("deployPsychological"),
+        //  Desplegar en producción--------------------------------------------
+        //         Text("deployPsychological"),
+        //            Text("MBTI: ${myInfo.mbti}"),
+        //            Text("Enneagram: ${myInfo.enneagram}"),
+        //            Text("BigFive: ${myInfo.bigFive}"),
+        Text("MBTI:mbti"),
+        Text("Enneagram:gram"),
+        Text("BigFive:Five"),
       ],
     );
   }
 
   Widget deployDiagnosedData({PersonResp? person}) {
-    // final GeneralInformation myInfo = person.generalInformation;
+    // final DiagnosedData  myInfo = person.diagnosedData;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
         // Desplegar en producción--------------------------------------------
-        Text("deployDiagnosedData"),
+        // Text("deployDiagnosedData"),
+        // Text("Neck: ${myInfo. weight}"),
+        // Text("Shoulder: ${myInfo.diagnosedConditions}"),
+        // Text("Chest: ${myInfo.diagnosis }"),
+        // Text("Chest: ${myInfo.sleepPattern }"),
+        // Text("Chest: ${myInfo.menstrualCycle }"),
+
+        Text("Neck: myInfo. weight"),
+        Text("Shoulder: myInfo.diagnosedConditions"),
+        Text("Chest: myInfo.diagnosis "),
+        Text("Chest: myInfo.sleepPattern "),
+        Text("Chest: myInfo.menstrualCycle "),
       ],
     );
   }
 
   Widget deployContactAbout({PersonResp? person}) {
-    // final GeneralInformation myInfo = person.generalInformation;
+    // final ContactAbout myInfo = person.contactAbout;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
         // Desplegar en producción--------------------------------------------
         Text("deployContactAbout"),
+
+        // Text("verbalContextualStyle: ${myInfo.verbalContextualStyle  }"),
+        // Text("languageComplexity: ${myInfo.languageComplexity  }"),
+        // Text("discourseFormat: ${myInfo.discourseFormat  }"),
+        // Text("responseInConflicts: ${myInfo.responseInConflicts  }"),
+        // Text("wordGestureSync: ${myInfo.wordGestureSync  }"),
+        // Text("postureChanges: ${myInfo.postureChanges  }"),
+        // Text("spontaneousMicroexpressions: ${myInfo.spontaneousMicroexpressions  }"),
+        // Text("personalSpaceRespect: ${myInfo.personalSpaceRespect  }"),
+        // Text("digitalInteractionFormality: ${myInfo.digitalInteractionFormality  }"),
+        // Text("writtenEmotionalExpression: ${myInfo.writtenEmotionalExpression  }"),
+        // Text("responseSpeed: ${myInfo.responseSpeed  }"),
+        // Text("interactionRhythmStyle: ${myInfo.interactionRhythmStyle  }"),
+        // Text("writingCare: ${myInfo.writingCare  }"),
+        // Text("messageLength: ${myInfo.messageLength  }"),
+        // Text("visualContact: ${myInfo.visualContact  }"),
+        // Text("physicalProximity: ${myInfo.physicalProximity  }"),
+        // Text("voiceTone: ${myInfo.voiceTone  }"),
+        // Text("intonation: ${myInfo.intonation  }"),
+        // Text("gesticulation: ${myInfo.gesticulation  }"),
+        // Text("generalAttitude: ${myInfo.generalAttitude  }"),
+        // Text("emotionalConnection: ${myInfo.emotionalConnection  }"),
+        // Text("interruptions: ${myInfo.interruptions  }"),
+        // Text("appearanceCare: ${myInfo.appearanceCare  }"),
+        // Text("listeningSkills: ${myInfo.listeningSkills  }"),
+        // Text("expressionClarity: ${myInfo.expressionClarity  }"),
+        // Text("oralCommunicationFormalityLevel: ${myInfo.oralCommunicationFormalityLevel  }"),
+
+        Text("verbalContextualStyle: verbalContextualStyle  "),
+        Text("languageComplexity: languageComplexity  "),
+        Text("discourseFormat: discourseFormat  "),
+        Text("responseInConflicts: responseInConflicts  "),
+        Text("wordGestureSync: wordGestureSync  "),
+        Text("postureChanges: postureChanges  "),
+        Text("spontaneousMicroexpressions: spontaneousMicroexpressions  "),
+        Text("personalSpaceRespect: personalSpaceRespect  "),
+        Text("digitalInteractionFormality: digitalInteractionFormality  "),
+        Text("writtenEmotionalExpression: writtenEmotionalExpression  "),
+        Text("responseSpeed: responseSpeed  "),
+        Text("interactionRhythmStyle: interactionRhythmStyle  "),
+        Text("writingCare: writingCare  "),
+        Text("messageLength: messageLength  "),
+        Text("visualContact: visualContact  "),
+        Text("physicalProximity: physicalProximity  "),
+        Text("voiceTone: voiceTone  "),
+        Text("intonation: intonation  "),
+        Text("gesticulation: gesticulation  "),
+        Text("generalAttitude: generalAttitude  "),
+        Text("emotionalConnection: emotionalConnection  "),
+        Text("interruptions: interruptions  "),
+        Text("appearanceCare: appearanceCare  "),
+        Text("listeningSkills: listeningSkills  "),
+        Text("expressionClarity: expressionClarity  "),
+        Text(
+            "oralCommunicationFormalityLevel: oralCommunicationFormalityLevel  "),
       ],
     );
   }
 }
+
+
+
+
+
+
+
+
+

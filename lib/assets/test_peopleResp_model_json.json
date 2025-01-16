@@ -27,7 +27,7 @@
     "deep_interests": ["philosophy", "minimalism", "sci-fi"]
   },
   "touch_sensitive_body": {
-    "neck": 1,
+    "neck": "1",
     "shoulder": 2,
     "chest": 3,
     "abdomen": 4,
@@ -96,7 +96,8 @@
     }
   },
 "contact_about": {
-      "verbal_contextual_style": {
+    
+  "verbal_contextual_style": {
         "options": ["logical", "emotional"],
         "selected": "logical"
       },
