@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:people_collection/data/update_profile_data.dart';
 import 'package:people_collection/models/person_resp.dart';
 import 'package:people_collection/widgets/text_field_save.dart';
 
@@ -11,7 +10,7 @@ class EditPersonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profileController = Get.put(UpdateProfileController());
+    final thisController = Get.put(EditPersonPageController());
     final PersonResp? person = Get.arguments;
     double sizeSpace = 8;
     return Scaffold(
@@ -19,10 +18,16 @@ class EditPersonPage extends StatelessWidget {
         title: Text('Edit Person'),
       ),
       body: ListView(
-        children: [ActionDeployWidget(boolCtx: profileController.bool_name_controller,textTitle: Text('asdf'),deployWidget: Text("data"),),
-          TextFieldSave(function: ()=>print('activado'),
-            boolController: profileController.bool_name_controller,
-            stringController: profileController.text_name_controller,
+        children: [
+          ActionDeployWidget(
+            boolCtx: thisController.bool_name_controller,
+            textTitle: Text('asdf'),
+            deployWidget: Text("data"),
+          ),
+          TextFieldSave(
+            function: () => print('activado'),
+            boolController: thisController.bool_name_controller,
+            stringController: thisController.text_name_controller,
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -42,4 +47,9 @@ class EditPersonPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class EditPersonPageController extends GetxController {
+  final text_name_controller = 'Hola'.obs;
+  final bool_name_controller = false.obs;
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class NewPersonPage extends StatelessWidget {
   const NewPersonPage({Key? key}) : super(key: key);
 
@@ -14,11 +13,9 @@ class NewPersonPage extends StatelessWidget {
       body: Center(
         child: Text('NewPersonPage'),
       ),
-         floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
-              Get.back();
-       
-          
+          Get.back();
         },
         tooltip: 'Comeback',
         child: const Icon(Icons.check),

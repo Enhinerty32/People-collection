@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:people_collection/models/person_resp.dart';
 import 'package:people_collection/routes/_routes.dart';
-import 'package:people_collection/services/view_person_page_settings.dart';
 
 import '../widgets/_widgets.dart';
 
@@ -11,7 +10,7 @@ class ViewPersonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewPersonSettings = Get.put(ViewPersonPageSettings());
+    final thisController = Get.put(ViewPersonPageController());
     final PersonResp? person = Get.arguments;
 
     double sizeSpace = 8;
@@ -32,33 +31,37 @@ class ViewPersonPage extends StatelessWidget {
           showProfile(sizeSpace),
           Container(
             margin: EdgeInsets.all(10),
-            child:  Column(
-                  children: [
-                    ActionDeployWidget(textTitle:Text('general_information '),
-                        deployWidget: deployGeneralInfo(),
-                        boolCtx: viewPersonSettings
-                            .general_information_deplegate_value),
-                    ActionDeployWidget(textTitle:Text('interests'),
-                        deployWidget: deployInterests(),
-                        boolCtx: viewPersonSettings.interest_deplegate_value),
-                     ActionDeployWidget(textTitle: Text('touch_sensitive_body'),
-                        deployWidget: deployTouchSensitveBody(),
-                        boolCtx: viewPersonSettings
-                            .touch_sensitive_body_deplegate_value),
-                  ActionDeployWidget(textTitle:Text('psychological_analysis'),
-                        deployWidget: deployPsychological(),
-                        boolCtx: viewPersonSettings
-                            .psychological_analysis_deplegate_value),
-                  ActionDeployWidget(textTitle: Text('diagnosed_data'),
-                        deployWidget: deployDiagnosedData(),
-                        boolCtx:
-                            viewPersonSettings.diagnosed_data_deplegate_value),
-                    ActionDeployWidget(textTitle:Text('contact_about'),
-                        deployWidget: deployContactAbout(),
-                        boolCtx:
-                            viewPersonSettings.contact_about_deplegate_value),
-                  ],
-                ),
+            child: Column(
+              children: [
+                ActionDeployWidget(
+                    textTitle: Text('general_information '),
+                    deployWidget: deployGeneralInfo(),
+                    boolCtx:
+                        thisController.general_information_deplegate_value),
+                ActionDeployWidget(
+                    textTitle: Text('interests'),
+                    deployWidget: deployInterests(),
+                    boolCtx: thisController.interest_deplegate_value),
+                ActionDeployWidget(
+                    textTitle: Text('touch_sensitive_body'),
+                    deployWidget: deployTouchSensitveBody(),
+                    boolCtx:
+                        thisController.touch_sensitive_body_deplegate_value),
+                ActionDeployWidget(
+                    textTitle: Text('psychological_analysis'),
+                    deployWidget: deployPsychological(),
+                    boolCtx:
+                        thisController.psychological_analysis_deplegate_value),
+                ActionDeployWidget(
+                    textTitle: Text('diagnosed_data'),
+                    deployWidget: deployDiagnosedData(),
+                    boolCtx: thisController.diagnosed_data_deplegate_value),
+                ActionDeployWidget(
+                    textTitle: Text('contact_about'),
+                    deployWidget: deployContactAbout(),
+                    boolCtx: thisController.contact_about_deplegate_value),
+              ],
+            ),
           )
         ],
       ),
@@ -359,11 +362,11 @@ class ViewPersonPage extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
-
-
+class ViewPersonPageController extends GetxController {
+  final general_information_deplegate_value = false.obs;
+  final interest_deplegate_value = false.obs;
+  final touch_sensitive_body_deplegate_value = false.obs;
+  final psychological_analysis_deplegate_value = false.obs;
+  final diagnosed_data_deplegate_value = false.obs;
+  final contact_about_deplegate_value = false.obs;
+}

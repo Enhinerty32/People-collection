@@ -4,20 +4,15 @@ import 'package:get/get.dart';
 class TestPage extends StatelessWidget {
   const TestPage({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
-
-final dataGet=Get.arguments;
-
+    final dataGet = Get.arguments;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Pagina nueva"),
       ),
-     
       body: Center(
         child: Container(
           child: ListView.builder(
