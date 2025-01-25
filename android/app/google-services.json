@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "326042041475",
+    "project_id": "people-collection-e343b",
+    "storage_bucket": "people-collection-e343b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326042041475:android:84acd6d6109c9347eeafb6",
+        "android_client_info": {
+          "package_name": "com.example.people_collection"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEtk33qRwQTLpUb7_wInwLLQt00d-u3zU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
