@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:people_collection/models/person_resp.dart';
 import 'package:people_collection/widgets/text_field_save.dart';
 
+import '../models/user_model.dart';
 import '../widgets/action_deploy_widget.dart';
 
 class EditPersonPage extends StatelessWidget {
@@ -11,7 +11,7 @@ class EditPersonPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final thisController = Get.put(EditPersonPageController());
-    final PersonResp? person = Get.arguments;
+    final ListPerson? person = Get.arguments;
     double sizeSpace = 8;
     return Scaffold(
       appBar: AppBar(

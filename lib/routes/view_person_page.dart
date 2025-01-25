@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:people_collection/models/person_resp.dart';
 import 'package:people_collection/routes/_routes.dart';
+import 'package:people_collection/routes/map_screen.dart';
 
+import '../models/user_model.dart';
 import '../widgets/_widgets.dart';
 
 class ViewPersonPage extends StatelessWidget {
-  const ViewPersonPage({Key? key}) : super(key: key);
+  const ViewPersonPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final thisController = Get.put(ViewPersonPageController());
-    final PersonResp? person = Get.arguments;
+    final ListPerson person = Get.arguments;
 
     double sizeSpace = 8;
+      final  query = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Column(
           children: [
             Text(
-              "fullName: Maria antonieta  ",
+              "${person.generalInformation.fullName}  ",
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -27,15 +29,18 @@ class ViewPersonPage extends StatelessWidget {
         ),
       ),
       body: ListView(
+        
         children: [
-          showProfile(sizeSpace),
+          showProfile(sizeSpace, person.generalInformation),
           Container(
             margin: EdgeInsets.all(10),
             child: Column(
+              
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ActionDeployWidget(
                     textTitle: Text('general_information '),
-                    deployWidget: deployGeneralInfo(),
+                    deployWidget: deployGeneralInfo(person: person,),
                     boolCtx:
                         thisController.general_information_deplegate_value),
                 ActionDeployWidget(
@@ -76,7 +81,7 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
-  Row showProfile(double sizeSpace) {
+  Row showProfile(double sizeSpace, GeneralInformation myInfo) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -95,34 +100,45 @@ class ViewPersonPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               //Desplegar en produccion-------------------------
-              // Text("Nickname: ${myInfo.nickname}"),
-              // Text("Full Name: ${myInfo.fullName}"),
-              // Text("Age: ${calculateAge("2012-02-27")} "),
-              // Text("Gender: ${myInfo.gender}"),
-              // Text("Connection Level: ${myInfo.connectionLevel}"),
               Text(
-                "Nickname: Capilla",
+                "Apodo: ${myInfo.nickname.isEmpty ? '--' : myInfo.nickname}         ",
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
               SizedBox(
                 height: sizeSpace,
               ),
               Text(
-                "Age:  24} ",
+                "Nombre: ${myInfo.fullName.isEmpty ? '--' : myInfo.fullName}         ",
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
               SizedBox(
                 height: sizeSpace,
               ),
               Text(
-                "Gender: mujer",
+                "Edad: ${myInfo.birthDate.isEmpty ? '--' : ("2012-02-27")}          ",
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
               SizedBox(
                 height: sizeSpace,
               ),
               Text(
-                "Connection Lvl: - - - - - 0 - - - -",
+                "Genero: ${myInfo.gender.isEmpty ? '--' : myInfo.gender}              ",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              SizedBox(
+                height: sizeSpace,
+              ),
+              Text(
+                "Connection Level: ${myInfo.connectionLevel == 0 ? '--' : myInfo.connectionLevel}",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              SizedBox(
+                height: sizeSpace,
               ),
             ],
           ),
@@ -131,53 +147,35 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
-  Widget deployGeneralInfo({PersonResp? person}) {
-    // final GeneralInformation myInfo = person.generalInformation;
+  Widget deployGeneralInfo({required ListPerson person}) {
+    final GeneralInformation myInfo = person.generalInformation;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
         // // Desplegar en producción--------------------------------------------
-        // Text("Full Name: ${myInfo.fullName}"),
-        // Text("Description: ${myInfo.description}"),
-        // Text("Nickname: ${myInfo.nickname}"),
-        // Text("Mail: ${myInfo.mail}"),
-        // Text("Blood Type: ${myInfo.bloodType}"),
-        // Text("Birth Date: ${myInfo.birthDate}"),
-        // Text(
-        //     "Address Location: ${myInfo.address[0]}, ${myInfo.address[1]}"),
-        // Text("Workplace: ${myInfo.workplace}"),
-        // Text("Family: ${myInfo.closeRelationships.family.join(', ')}"),
-        // Text("Friends: ${myInfo.closeRelationships.friends.join(', ')}"),
-        // Text("Enemies: ${myInfo.closeRelationships.enemies.join(', ')}"),
+        myInfo.description.isEmpty? SizedBox():  Text("Description${myInfo.description}"),
+        myInfo.mail.isEmpty?  SizedBox(): Text("Mail${myInfo.mail}")                     ,
+        myInfo.bloodType.isEmpty?SizedBox():  Text("Blood Type${myInfo.bloodType}")     ,
+        myInfo.birthDate.isEmpty?SizedBox():  Text("Birth Date${myInfo.birthDate}")     ,
+        myInfo.workplace.isEmpty?SizedBox(): Text("Workplace${myInfo.workplace}")       ,
+        // myInfo.addressLocation[0]==0 && myInfo.addressLocation[1]==0? SizedBox():Text("Address Location: ${myInfo.addressLocation[0]}, ${myInfo.addressLocation[1]}") ,
+        myInfo.locations.isEmpty? SizedBox():TextButton(onPressed: (){
+        Get.toNamed('/map' ,arguments:myInfo.locations );
+       }, child: Text('Direccion de su hogar'))
         // Text("Personal History: ${myInfo.personalHistory.join(', ')}"),
-        // Text("Gender: ${myInfo.gender}"),
         // Text("Languages Spoken: ${myInfo.languagesSpoken.join(', ')}"),
-        // Text("Phones: ${myInfo.phones.join(', ')}"),
-        // Text("Social Media: ${myInfo.socialMedia.join(', ')}"),
-        // Text("Connection Level: ${myInfo.connectionLevel}"),
-        Text("Full Name: fullName"),
-        Text("Description: description"),
-        Text("Nickname: nickname"),
-        Text("Mail: mail"),
-        Text("Blood Type: bloodType"),
-        Text("Birth Date: birthDate"),
-        Text("Workplace: workplace"),
-        Text("Gender: gender"),
-        Text("Connection Level: .connectionLevel"),
-        Text("Address Location: .address[0]=lat,address[1]=log"),
-        Text("Family: closeRelationships.family"),
-        Text("Friends: closeRelationships.friends"),
-        Text("Enemies: closeRelationships.enemies"),
-        Text("Personal History: personalHistory"),
-        Text("Languages Spoken: languagesSpoken"),
-        Text("Phones: phones"),
-        Text("Social Media: socialMedia"),
+        // Text("Phones:           ${myInfo.phones.join(', ')}"),
+        // Text("Social Media:     ${myInfo.socialMedia.join(', ')}"),
+        // Text("Enemies:          ${myInfo.closeRelationships.enemies.join(', ')}"),
+        // Text("Friends:          ${myInfo.closeRelationships.friends.join(', ')}"),
+        // Text("Family:           ${myInfo.closeRelationships.family.join(', ')}"),
       ],
     );
   }
 
-  Widget deployInterests({PersonResp? person}) {
+  Widget deployInterests({ListPerson? person}) {
     // final Interests myInfo = person.interests;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,7 +198,7 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
-  Widget deployTouchSensitveBody({PersonResp? person}) {
+  Widget deployTouchSensitveBody({ListPerson? person}) {
     // final TouchSensitiveBody myInfo = person.touchSensitiveBody;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,7 +251,7 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
-  Widget deployPsychological({PersonResp? person}) {
+  Widget deployPsychological({ListPerson? person}) {
     // final PsychologicalAnalysis myInfo = person.psychologicalAnalysis;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,7 +269,7 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
-  Widget deployDiagnosedData({PersonResp? person}) {
+  Widget deployDiagnosedData({ListPerson? person}) {
     // final DiagnosedData  myInfo = person.diagnosedData;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,7 +292,7 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
-  Widget deployContactAbout({PersonResp? person}) {
+  Widget deployContactAbout({ListPerson? person}) {
     // final ContactAbout myInfo = person.contactAbout;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

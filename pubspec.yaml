@@ -37,6 +37,7 @@ dependencies:
   flutter_json_view: ^1.1.5
   get: ^4.6.5
   get_storage: ^2.1.1
+  google_maps_flutter: ^2.10.0
   google_sign_in: ^6.2.2
 
 dev_dependencies:

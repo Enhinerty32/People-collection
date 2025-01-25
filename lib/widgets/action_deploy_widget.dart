@@ -8,6 +8,7 @@ class ActionDeployWidget extends StatelessWidget {
   final Widget deployWidget;
   final MainAxisAlignment? rowMainAxisAlignment;
   final double? borderRadius;
+  final CrossAxisAlignment? crossAxisAlignmentColumn;
 
    ActionDeployWidget({super.key, 
     required this.textTitle,
@@ -15,19 +16,21 @@ class ActionDeployWidget extends StatelessWidget {
     required this.boolCtx,
     required this.deployWidget,
     this.rowMainAxisAlignment,
-    this.borderRadius,
+    this.borderRadius, this.crossAxisAlignmentColumn,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Column(crossAxisAlignment:crossAxisAlignmentColumn ?? CrossAxisAlignment.start,
       children: [
         InkWell(
+          
           borderRadius: BorderRadius.circular(borderRadius ?? 10),
           onTap: () => boolCtx.value = !boolCtx.value,
           child: Padding(
             padding: EdgeInsets.all(10),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: rowMainAxisAlignment ?? MainAxisAlignment.spaceBetween,
               children: [
                 textTitle,
@@ -50,4 +53,5 @@ class ActionDeployWidget extends StatelessWidget {
       ],
     );
   }
+
 }

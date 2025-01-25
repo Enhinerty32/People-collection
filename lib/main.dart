@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:people_collection/firebase_options.dart';
+import 'package:people_collection/routes/map_screen.dart';
 import 'auth/Data/auth_provider.dart';
 import 'auth/screen/login_screen.dart';
 import 'auth/screen/reset_pass_screen.dart';
@@ -40,10 +41,7 @@ class MyApp extends StatelessWidget {
           name: '/test',
           page: () => TestPage(),
         ),
-        GetPage(
-          name: '/newPerson',
-          page: () => NewPersonPage(),
-        ),
+    
         GetPage(
           name: '/editPerson',
           page: () => EditPersonPage(),
@@ -71,6 +69,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/settings',
           page: () => SettingsScreen(),
+        ),
+        GetPage(
+          name: '/map',
+          page: () =>MapScreen(),
         ),
       ],
     );

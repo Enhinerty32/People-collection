@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:people_collection/models/person_resp.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../models/user_model.dart';
+
 class TestModel extends GetxController {
-  var listPeople = <PersonResp>[].obs;
+  var listPeople = <ListPerson>[].obs;
   var name = ''.obs;
   var age = 0.obs;
 
@@ -30,7 +31,7 @@ class TestModel extends GetxController {
     if (jsonData is List) {
       // print('Es una lista: ${jsonData.length}');
       listPeople.value =
-          jsonData.map((item) => PersonResp.fromJson(item)).toList();
+          jsonData.map((item) => ListPerson.fromJson(item)).toList();
     } else if (jsonData is Map) {
       // print('Es un mapa: ${jsonData.keys}');
     }
