@@ -11,6 +11,7 @@ class CardViewPeopleWidget extends StatelessWidget {
 
   final void Function()? deleteButton;
   final ListPerson person;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class CardViewPeopleWidget extends StatelessWidget {
         children: [
           Card(
             child: Row(
-              children: [
+              children: [SizedBox(width: 10,),
                 CircleAvatar(
                   radius: 50,
                   backgroundImage: NetworkImage(

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:people_collection/data/storage_provider.dart';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel{
     String id;
     String name;
     String email;
@@ -262,7 +262,7 @@ class GeneralInformation {
     List<Location> locations;
     String workplace;
     CloseRelationships closeRelationships;
-    List<String> personalHistory;
+    List<PersonalHistory> personalHistory;
     String gender;
     List<String> languagesSpoken;
     List<String> phones;
@@ -297,7 +297,7 @@ class GeneralInformation {
         List<Location>? locations,
         String? workplace,
         CloseRelationships? closeRelationships,
-        List<String>? personalHistory,
+        List<PersonalHistory>? personalHistory,
         String? gender,
         List<String>? languagesSpoken,
         List<String>? phones,
@@ -336,7 +336,7 @@ class GeneralInformation {
         locations: List<Location>.from(json["locations"].map((x) => Location.fromJson(x))),
         workplace: json["workplace"],
         closeRelationships: CloseRelationships.fromJson(json["close_relationships"]),
-        personalHistory: List<String>.from(json["personal_history"].map((x) => x)),
+        personalHistory: List<PersonalHistory>.from(json["personal_history"].map((x) => PersonalHistory.fromJson(x))),
         gender: json["gender"],
         languagesSpoken: List<String>.from(json["languages_spoken"].map((x) => x)),
         phones: List<String>.from(json["phones"].map((x) => x)),
@@ -354,7 +354,7 @@ class GeneralInformation {
         "locations": List<dynamic>.from(locations.map((x) => x.toJson())),
         "workplace": workplace,
         "close_relationships": closeRelationships.toJson(),
-        "personal_history": List<dynamic>.from(personalHistory.map((x) => x)),
+        "personal_history": List<dynamic>.from(personalHistory.map((x) => x.toJson())),
         "gender": gender,
         "languages_spoken": List<dynamic>.from(languagesSpoken.map((x) => x)),
         "phones": List<dynamic>.from(phones.map((x) => x)),
@@ -405,19 +405,23 @@ class CloseRelationships {
 class Location {
     String namePlace;
     Place place;
+    String description;
 
     Location({
         required this.namePlace,
         required this.place,
+        required this.description,
     });
 
     Location copyWith({
         String? namePlace,
         Place? place,
+        String? description,
     }) => 
         Location(
             namePlace: namePlace ?? this.namePlace,
             place: place ?? this.place,
+            description: description ?? this.description,
         );
 
     factory Location.fromRawJson(String str) => Location.fromJson(json.decode(str));
@@ -427,11 +431,13 @@ class Location {
     factory Location.fromJson(Map<String, dynamic> json) => Location(
         namePlace: json["name_place"],
         place: Place.fromJson(json["place"]),
+        description: json["description"],
     );
 
     Map<String, dynamic> toJson() => {
         "name_place": namePlace,
         "place": place.toJson(),
+        "description": description,
     };
 }
 
@@ -465,6 +471,39 @@ class Place {
     Map<String, dynamic> toJson() => {
         "lat": lat,
         "lng": lng,
+    };
+}
+
+class PersonalHistory {
+    String title;
+    String history;
+
+    PersonalHistory({
+        required this.title,
+        required this.history,
+    });
+
+    PersonalHistory copyWith({
+        String? title,
+        String? history,
+    }) => 
+        PersonalHistory(
+            title: title ?? this.title,
+            history: history ?? this.history,
+        );
+
+    factory PersonalHistory.fromRawJson(String str) => PersonalHistory.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory PersonalHistory.fromJson(Map<String, dynamic> json) => PersonalHistory(
+        title: json["title"],
+        history: json["history"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "title": title,
+        "history": history,
     };
 }
 
@@ -520,7 +559,7 @@ class Interests {
 }
 
 class PsychologicalAnalysis {
-    Mbti mbti;
+    String mbti;
     Enneagram enneagram;
     BigFive bigFive;
 
@@ -531,7 +570,7 @@ class PsychologicalAnalysis {
     });
 
     PsychologicalAnalysis copyWith({
-        Mbti? mbti,
+        String? mbti,
         Enneagram? enneagram,
         BigFive? bigFive,
     }) => 
@@ -546,13 +585,13 @@ class PsychologicalAnalysis {
     String toRawJson() => json.encode(toJson());
 
     factory PsychologicalAnalysis.fromJson(Map<String, dynamic> json) => PsychologicalAnalysis(
-        mbti: Mbti.fromJson(json["mbti"]),
+        mbti: json["mbti"],
         enneagram: Enneagram.fromJson(json["enneagram"]),
         bigFive: BigFive.fromJson(json["big_five"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "mbti": mbti.toJson(),
+        "mbti": mbti,
         "enneagram": enneagram.toJson(),
         "big_five": bigFive.toJson(),
     };
@@ -610,15 +649,15 @@ class BigFive {
 }
 
 class Enneagram {
-    int perfectionist;
-    int helper;
-    int achiever;
-    int individualist;
-    int investigator;
-    int loyalist;
-    int enthusiast;
-    int challenger;
-    int peacemaker;
+    double perfectionist;
+    double helper;
+    double achiever;
+    double individualist;
+    double investigator;
+    double loyalist;
+    double enthusiast;
+    double challenger;
+    double peacemaker;
 
     Enneagram({
         required this.perfectionist,
@@ -633,15 +672,15 @@ class Enneagram {
     });
 
     Enneagram copyWith({
-        int? perfectionist,
-        int? helper,
-        int? achiever,
-        int? individualist,
-        int? investigator,
-        int? loyalist,
-        int? enthusiast,
-        int? challenger,
-        int? peacemaker,
+        double? perfectionist,
+        double? helper,
+        double? achiever,
+        double? individualist,
+        double? investigator,
+        double? loyalist,
+        double? enthusiast,
+        double? challenger,
+        double? peacemaker,
     }) => 
         Enneagram(
             perfectionist: perfectionist ?? this.perfectionist,
@@ -660,15 +699,15 @@ class Enneagram {
     String toRawJson() => json.encode(toJson());
 
     factory Enneagram.fromJson(Map<String, dynamic> json) => Enneagram(
-        perfectionist: json["perfectionist"],
-        helper: json["helper"],
+        perfectionist: json["perfectionist"]?.toDouble(),
+        helper: json["helper"]?.toDouble(),
         achiever: json["achiever"],
-        individualist: json["individualist"],
-        investigator: json["investigator"],
-        loyalist: json["loyalist"],
-        enthusiast: json["enthusiast"],
-        challenger: json["challenger"],
-        peacemaker: json["peacemaker"],
+        individualist: json["individualist"]?.toDouble(),
+        investigator: json["investigator"]?.toDouble(),
+        loyalist: json["loyalist"]?.toDouble(),
+        enthusiast: json["enthusiast"]?.toDouble(),
+        challenger: json["challenger"]?.toDouble(),
+        peacemaker: json["peacemaker"]?.toDouble(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -681,51 +720,6 @@ class Enneagram {
         "enthusiast": enthusiast,
         "challenger": challenger,
         "peacemaker": peacemaker,
-    };
-}
-
-class Mbti {
-    int extraversionIntroversion;
-    int sensingIntuition;
-    int thinkingFeeling;
-    int judgingPerceiving;
-
-    Mbti({
-        required this.extraversionIntroversion,
-        required this.sensingIntuition,
-        required this.thinkingFeeling,
-        required this.judgingPerceiving,
-    });
-
-    Mbti copyWith({
-        int? extraversionIntroversion,
-        int? sensingIntuition,
-        int? thinkingFeeling,
-        int? judgingPerceiving,
-    }) => 
-        Mbti(
-            extraversionIntroversion: extraversionIntroversion ?? this.extraversionIntroversion,
-            sensingIntuition: sensingIntuition ?? this.sensingIntuition,
-            thinkingFeeling: thinkingFeeling ?? this.thinkingFeeling,
-            judgingPerceiving: judgingPerceiving ?? this.judgingPerceiving,
-        );
-
-    factory Mbti.fromRawJson(String str) => Mbti.fromJson(json.decode(str));
-
-    String toRawJson() => json.encode(toJson());
-
-    factory Mbti.fromJson(Map<String, dynamic> json) => Mbti(
-        extraversionIntroversion: json["extraversion>introversion"],
-        sensingIntuition: json["sensing>intuition"],
-        thinkingFeeling: json["thinking>feeling"],
-        judgingPerceiving: json["judging>perceiving"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "extraversion>introversion": extraversionIntroversion,
-        "sensing>intuition": sensingIntuition,
-        "thinking>feeling": thinkingFeeling,
-        "judging>perceiving": judgingPerceiving,
     };
 }
 

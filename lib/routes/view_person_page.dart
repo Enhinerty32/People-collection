@@ -1,10 +1,18 @@
+import 'package:chips_choice/chips_choice.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:people_collection/Provider/settings_provider.dart';
 import 'package:people_collection/routes/_routes.dart';
 import 'package:people_collection/routes/map_screen.dart';
-
+import 'package:people_collection/widgets/show_and_edit_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/user_model.dart';
 import '../widgets/_widgets.dart';
+import '../widgets/enneagram_radar_chart_widget.dart';
+import '../widgets/get_mbti_widged.dart';
+import '../widgets/view_person_widgets.dart/general_information_widget.dart';
 
 class ViewPersonPage extends StatelessWidget {
   const ViewPersonPage({super.key});
@@ -13,187 +21,146 @@ class ViewPersonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final thisController = Get.put(ViewPersonPageController());
     final ListPerson person = Get.arguments;
+    const double sizeSpace = 8;
 
-    double sizeSpace = 8;
-      final  query = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          children: [
-            Text(
-              "${person.generalInformation.fullName}  ",
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+        title: Text(
+          person.generalInformation.fullName,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
       body: ListView(
-        
+        padding: const EdgeInsets.all(10),
         children: [
-          showProfile(sizeSpace, person.generalInformation),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Column(
-              
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ActionDeployWidget(
-                    textTitle: Text('general_information '),
-                    deployWidget: deployGeneralInfo(person: person,),
-                    boolCtx:
-                        thisController.general_information_deplegate_value),
-                ActionDeployWidget(
-                    textTitle: Text('interests'),
-                    deployWidget: deployInterests(),
-                    boolCtx: thisController.interest_deplegate_value),
-                ActionDeployWidget(
-                    textTitle: Text('touch_sensitive_body'),
-                    deployWidget: deployTouchSensitveBody(),
-                    boolCtx:
-                        thisController.touch_sensitive_body_deplegate_value),
-                ActionDeployWidget(
-                    textTitle: Text('psychological_analysis'),
-                    deployWidget: deployPsychological(),
-                    boolCtx:
-                        thisController.psychological_analysis_deplegate_value),
-                ActionDeployWidget(
-                    textTitle: Text('diagnosed_data'),
-                    deployWidget: deployDiagnosedData(),
-                    boolCtx: thisController.diagnosed_data_deplegate_value),
-                ActionDeployWidget(
-                    textTitle: Text('contact_about'),
-                    deployWidget: deployContactAbout(),
-                    boolCtx: thisController.contact_about_deplegate_value),
-              ],
-            ),
-          )
+          GeneralInformationWidget(person: person,),//listo
+          _buildCategoryExpansionTile("Intereses", deployInterests(person: person)),//listo
+          _buildCategoryExpansionTile("Datos Psicologicos", deployPsychological(person: person)),//aun no
+          _buildCategoryExpansionTile("Sensible al tacto", deployTouchSensitveBody()),//aun no
+          _buildCategoryExpansionTile("Diagnóstico", deployDiagnosedData()),//aun no
+          _buildCategoryExpansionTile("Datos adicionales", deployContactAbout()),//aun no
+          const SizedBox(height: 150),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(EditPersonPage(),
-              arguments: person, transition: Transition.cupertino);
-        },
-        tooltip: 'Comeback',
+        onPressed: () => Get.to(EditPersonPage(), arguments: person, transition: Transition.cupertino),
+        tooltip: 'Editar',
         child: const Icon(Icons.edit),
       ),
     );
   }
+ //---------------
+  Widget _buildInfoText(String label, String value) {
+    return Text("$label: ${value.isEmpty ? '--' : value}");
+  }
 
-  Row showProfile(double sizeSpace, GeneralInformation myInfo) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(
-          width: 10,
-        ),
-        CircleAvatar(
-          radius: 55,
-          backgroundImage: NetworkImage(
-              'https://preview.redd.it/l0m6jy5zqwxa1.png?width=640&crop=smart&auto=webp&s=c011ad1e3fcf666ade161a3a48ff6419fb944882'),
-        ),
-        Container(
-          width: 250,
-          padding: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+
+//-------------------
+  Widget _buildProfileText(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Text("$label: ${value.isEmpty ? '--' : value}", overflow: TextOverflow.ellipsis, maxLines: 2),
+    );
+  }
+//-----------------
+  Widget _buildExpansionTile(String title, Widget child) {
+    return ExpansionTile(
+      title: Text(title,),
+      children: [SizedBox(width: 400,child: child)],
+    );
+  }
+
+  //---------------
+  Widget _buildCategoryExpansionTile(String title, Widget child) {
+    return ExpansionTile(
+      title: Text(title,style: TextStyle(color: Colors.cyanAccent),),
+      children: [SizedBox(width: 400,child: child)],
+    );
+  }
+
+
+
+//-----------------
+  Widget _buildListTextSection({required List<String> listItems, required String title}) {
+    return _buildListSection(
+      title: title,
+      listItems: listItems,
+      emptyMessage: "No hay datos",
+      itemBuilder: (context, item) => Text(item),
+    );
+  }
+
+  Widget _buildListSection({required String title,   required List listItems, required String emptyMessage, required Widget Function(BuildContext, dynamic) itemBuilder}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+    
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              //Desplegar en produccion-------------------------
-              Text(
-                "Apodo: ${myInfo.nickname.isEmpty ? '--' : myInfo.nickname}         ",
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              SizedBox(
-                height: sizeSpace,
-              ),
-              Text(
-                "Nombre: ${myInfo.fullName.isEmpty ? '--' : myInfo.fullName}         ",
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              SizedBox(
-                height: sizeSpace,
-              ),
-              Text(
-                "Edad: ${myInfo.birthDate.isEmpty ? '--' : ("2012-02-27")}          ",
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              SizedBox(
-                height: sizeSpace,
-              ),
-              Text(
-                "Genero: ${myInfo.gender.isEmpty ? '--' : myInfo.gender}              ",
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              SizedBox(
-                height: sizeSpace,
-              ),
-              Text(
-                "Connection Level: ${myInfo.connectionLevel == 0 ? '--' : myInfo.connectionLevel}",
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              SizedBox(
-                height: sizeSpace,
+              Expanded(
+                child: _buildExpansionTile(
+                  title,
+                  listItems.isEmpty
+                      ? Text(emptyMessage)
+                      : Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: listItems.length,
+                            itemBuilder: (context, index) {
+                              final item = listItems[index];
+                              return itemBuilder(context, item);
+                            },
+                          ),
+                      ),
+                ),
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget deployGeneralInfo({required ListPerson person}) {
-    final GeneralInformation myInfo = person.generalInformation;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 10,
-      children: [
-        // // Desplegar en producción--------------------------------------------
-        myInfo.description.isEmpty? SizedBox():  Text("Description${myInfo.description}"),
-        myInfo.mail.isEmpty?  SizedBox(): Text("Mail${myInfo.mail}")                     ,
-        myInfo.bloodType.isEmpty?SizedBox():  Text("Blood Type${myInfo.bloodType}")     ,
-        myInfo.birthDate.isEmpty?SizedBox():  Text("Birth Date${myInfo.birthDate}")     ,
-        myInfo.workplace.isEmpty?SizedBox(): Text("Workplace${myInfo.workplace}")       ,
-        // myInfo.addressLocation[0]==0 && myInfo.addressLocation[1]==0? SizedBox():Text("Address Location: ${myInfo.addressLocation[0]}, ${myInfo.addressLocation[1]}") ,
-        myInfo.locations.isEmpty? SizedBox():TextButton(onPressed: (){
-        Get.toNamed('/map' ,arguments:myInfo.locations );
-       }, child: Text('Direccion de su hogar'))
-        // Text("Personal History: ${myInfo.personalHistory.join(', ')}"),
-        // Text("Languages Spoken: ${myInfo.languagesSpoken.join(', ')}"),
-        // Text("Phones:           ${myInfo.phones.join(', ')}"),
-        // Text("Social Media:     ${myInfo.socialMedia.join(', ')}"),
-        // Text("Enemies:          ${myInfo.closeRelationships.enemies.join(', ')}"),
-        // Text("Friends:          ${myInfo.closeRelationships.friends.join(', ')}"),
-        // Text("Family:           ${myInfo.closeRelationships.family.join(', ')}"),
-      ],
+//----------------
+  Widget _buildInfoTextButtonURL(String url) {
+    return Tooltip(
+      message: url,
+      child: IconButton(
+        onPressed: () async {
+          await SettingsProvider().launchURL(url);
+        },
+        icon: Icon(SettingsProvider().getIconForPlatform(url)),
+      ),
     );
   }
 
-  Widget deployInterests({ListPerson? person}) {
-    // final Interests myInfo = person.interests;
+
+
+ 
+
+  Widget deployInterests({required ListPerson person}) {
+    final Interests myInfo = person.interests;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
         // // Desplegar en producción--------------------------------------------
         // Text("deployInterests"),
-        // Text("Mystical Interests: ${myInfo.mysticalInterests.join(', ')}"),
-        // Text("Hobby Areas: ${myInfo.hobbyAreas.join(', ')}"),
-        // Text("Musical Preferences: ${myInfo.musicalPreferences.join(', ')}"),
-        // Text("Cinematic Themes: ${myInfo.cinematicThemes.join(', ')}"),
-        // Text("Deep Interests: ${myInfo.deepInterests.join(', ')}"),
-
-        Text("Mystical Interests: mysticalInterests"),
-        Text("Hobby Areas: hobbyAreas"),
-        Text("Musical Preferences: musicalPreferences"),
-        Text("Cinematic Themes: cinematicThemes"),
-        Text("Deep Interests: deepInterests"),
+        _buildListTextSection(listItems: myInfo.mysticalInterests,title:"Intereses misticos" ),
+        _buildListTextSection(listItems:myInfo.hobbyAreas,title:"Pasatimepos" ),
+        _buildListTextSection(listItems:myInfo.musicalPreferences,title:"Preferencias musicales " ),
+        _buildListTextSection(listItems:myInfo.cinematicThemes,title:"Intereses Cinematograficos" ),
+        _buildListTextSection(listItems:myInfo.deepInterests,title:"Intereses Profundos" ),
+         
+         
+         
+         
       ],
     );
   }
@@ -251,21 +218,23 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
-  Widget deployPsychological({ListPerson? person}) {
-    // final PsychologicalAnalysis myInfo = person.psychologicalAnalysis;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 10,
-      children: [
-        //  Desplegar en producción--------------------------------------------
-        //         Text("deployPsychological"),
-        //            Text("MBTI: ${myInfo.mbti}"),
-        //            Text("Enneagram: ${myInfo.enneagram}"),
-        //            Text("BigFive: ${myInfo.bigFive}"),
-        Text("MBTI:mbti"),
-        Text("Enneagram:gram"),
-        Text("BigFive:Five"),
-      ],
+  Widget deployPsychological({required ListPerson person}) {
+    final PsychologicalAnalysis myInfo = person.psychologicalAnalysis;
+    return SizedBox(
+      child: Column(
+       crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 10,
+        children: [
+          //  Desplegar en producción--------------------------------------------
+          //         Text("deployPsychological"),
+          //            Text("Enneagram: ${myInfo.enneagram}"),
+          //            Text("BigFive: ${myInfo.bigFive}"),
+          MbtiWidget(mbtiType: myInfo.mbti),
+         EnneagramRadarChartWidget(enneagramData:myInfo.enneagram ,),
+         
+          // Text("BigFive:Five"),
+        ],
+      ),
     );
   }
 
@@ -360,11 +329,4 @@ class ViewPersonPage extends StatelessWidget {
   }
 }
 
-class ViewPersonPageController extends GetxController {
-  final general_information_deplegate_value = false.obs;
-  final interest_deplegate_value = false.obs;
-  final touch_sensitive_body_deplegate_value = false.obs;
-  final psychological_analysis_deplegate_value = false.obs;
-  final diagnosed_data_deplegate_value = false.obs;
-  final contact_about_deplegate_value = false.obs;
-}
+class ViewPersonPageController extends GetxController {}

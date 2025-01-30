@@ -53,6 +53,7 @@ class StorageProvider<T extends BaseModel> extends GetxController {
           .collection(collectionPath)
           .doc(userId)
           .set(data.toJson(), SetOptions(merge: true));
+          Get.offAllNamed('/login');
     } catch (e) {
       print("Error updating model in $collectionPath: $e");
     }
