@@ -10,6 +10,7 @@ import 'auth/screen/reset_pass_screen.dart';
 import 'auth/screen/settings_screen.dart';
 import 'auth/screen/sign_up_screen.dart';
 import 'routes/_routes.dart';
+import 'routes/chat_ia_screen.dart';
 import 'routes/home_screen.dart';
 
 Future<void> main() async {
@@ -73,6 +74,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/map',
           page: () =>MapScreen(),
+        ),
+        GetPage(
+          name: '/chat',
+          page: () =>ChatIAScreen(),
         ),
       ],
     );

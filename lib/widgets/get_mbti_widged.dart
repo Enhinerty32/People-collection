@@ -122,11 +122,19 @@ class MbtiWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      
+       if (mbtiType.isEmpty ||mbtiType==null ) {
+      return Center(child: Text("Tipo MBTI no encontrado"));
+    }
     final String baseType = mbtiType.substring(0, 4);
+    
+       if (baseType.isEmpty ) {
+      return Center(child: Text("Tipo MBTI no encontrado"));
+    }
     final data = mbtiData[baseType];
     print("assets/mbti/${baseType}.jpg");
 
-    if (data == null) {
+    if (data == null ) {
       return Center(child: Text("Tipo MBTI no encontrado"));
     }
 
@@ -139,18 +147,20 @@ class MbtiWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //  Image(width: 300,image: AssetImage("assets/mbti/${data["image"]}.jpg")),
-         ClipRRect(
-  borderRadius: BorderRadius.circular(12), // Ajusta el radio de las esquinas
-  child: Image.asset(
-    "assets/mbti/${baseType}.jpg",
-    fit: BoxFit.cover,
-  ),
-),
+            ClipRRect(
+              borderRadius:
+                  BorderRadius.circular(12), // Ajusta el radio de las esquinas
+              child: Image.asset(
+                "assets/mbti/${baseType}.jpg",
+                fit: BoxFit.cover,
+              ),
+            ),
             // Image.network(data["image"]!, height: 100),
             SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [  Text(
+              children: [
+                Text(
                   data["title"]!,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
@@ -158,7 +168,6 @@ class MbtiWidget extends StatelessWidget {
                   mbtiType,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
-               
               ],
             ),
 

@@ -12,6 +12,7 @@ import '../models/user_model.dart';
 import '../widgets/_widgets.dart';
 import '../widgets/enneagram_radar_chart_widget.dart';
 import '../widgets/get_mbti_widged.dart';
+import '../widgets/sleep_pattern_widget.dart';
 import '../widgets/view_person_widgets.dart/general_information_widget.dart';
 
 class ViewPersonPage extends StatelessWidget {
@@ -36,18 +37,13 @@ class ViewPersonPage extends StatelessWidget {
         children: [
           GeneralInformationWidget(person: person,),//listo
           _buildCategoryExpansionTile("Intereses", deployInterests(person: person)),//listo
-          _buildCategoryExpansionTile("Datos Psicologicos", deployPsychological(person: person)),//aun no
-          _buildCategoryExpansionTile("Sensible al tacto", deployTouchSensitveBody()),//aun no
-          _buildCategoryExpansionTile("Diagnóstico", deployDiagnosedData()),//aun no
-          _buildCategoryExpansionTile("Datos adicionales", deployContactAbout()),//aun no
+          _buildCategoryExpansionTile("Datos Psicologicos", deployPsychological(person: person)),//Falta Big Five
+          _buildCategoryExpansionTile("Diagnóstico", deployDiagnosedData(person: person)),//Falta Ciclo menstrual
+          // _buildCategoryExpansionTile("Sensible al tacto", deployTouchSensitveBody()),//aun no
+          // _buildCategoryExpansionTile("Datos adicionales", deployContactAbout()),//aun no
           const SizedBox(height: 150),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(EditPersonPage(), arguments: person, transition: Transition.cupertino),
-        tooltip: 'Editar',
-        child: const Icon(Icons.edit),
-      ),
+      ), 
     );
   }
  //---------------
@@ -79,15 +75,22 @@ class ViewPersonPage extends StatelessWidget {
     );
   }
 
+//-----------------
 
-
+Widget textWidget(String text){
+return Padding(
+  padding:  EdgeInsets.symmetric(vertical:  6.0),
+  child: Text(text
+      ,style: TextStyle(fontSize: 15),),
+);
+  }
 //-----------------
   Widget _buildListTextSection({required List<String> listItems, required String title}) {
     return _buildListSection(
       title: title,
       listItems: listItems,
       emptyMessage: "No hay datos",
-      itemBuilder: (context, item) => Text(item),
+      itemBuilder: (context, item) => textWidget(item),
     );
   }
 
@@ -150,10 +153,9 @@ class ViewPersonPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
-        // // Desplegar en producción--------------------------------------------
-        // Text("deployInterests"),
+
         _buildListTextSection(listItems: myInfo.mysticalInterests,title:"Intereses misticos" ),
-        _buildListTextSection(listItems:myInfo.hobbyAreas,title:"Pasatimepos" ),
+        _buildListTextSection(listItems:myInfo.hobbyAreas,title:"Pasatiempos" ),
         _buildListTextSection(listItems:myInfo.musicalPreferences,title:"Preferencias musicales " ),
         _buildListTextSection(listItems:myInfo.cinematicThemes,title:"Intereses Cinematograficos" ),
         _buildListTextSection(listItems:myInfo.deepInterests,title:"Intereses Profundos" ),
@@ -225,42 +227,39 @@ class ViewPersonPage extends StatelessWidget {
        crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,
         children: [
-          //  Desplegar en producción--------------------------------------------
-          //         Text("deployPsychological"),
-          //            Text("Enneagram: ${myInfo.enneagram}"),
-          //            Text("BigFive: ${myInfo.bigFive}"),
+ 
           MbtiWidget(mbtiType: myInfo.mbti),
          EnneagramRadarChartWidget(enneagramData:myInfo.enneagram ,),
-         
           // Text("BigFive:Five"),
         ],
       ),
     );
   }
 
-  Widget deployDiagnosedData({ListPerson? person}) {
-    // final DiagnosedData  myInfo = person.diagnosedData;
+  Widget deployDiagnosedData({required ListPerson person}) {
+    final DiagnosedData  myInfo = person.diagnosedData;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
         // Desplegar en producción--------------------------------------------
         // Text("deployDiagnosedData"),
-        // Text("Neck: ${myInfo. weight}"),
-        // Text("Shoulder: ${myInfo.diagnosedConditions}"),
-        // Text("Chest: ${myInfo.diagnosis }"),
-        // Text("Chest: ${myInfo.sleepPattern }"),
-        // Text("Chest: ${myInfo.menstrualCycle }"),
+        myInfo.diagnosis.isEmpty?textWidget("Diagnóstico General: --"):textWidget("Diagnóstico General: ${myInfo.diagnosis}"),
+        textWidget("Peso: ${myInfo. weight} kg"),
+         _buildListTextSection(listItems: myInfo.diagnosedConditions,title:"Condiciones diagnosticadas" ),
+        _buildExpansionTile('Horario de sueño', SleepPatternWidget(sleepPattern: myInfo.sleepPattern)),
 
-        Text("Neck: myInfo. weight"),
-        Text("Shoulder: myInfo.diagnosedConditions"),
-        Text("Chest: myInfo.diagnosis "),
-        Text("Chest: myInfo.sleepPattern "),
-        Text("Chest: myInfo.menstrualCycle "),
+        //Aun no implementado 
+        // Text("Ciclo Menstrual: ${myInfo.menstrualCycle }"), 
       ],
     );
   }
 
+
+
+
+
+//Aun no implementado 
   Widget deployContactAbout({ListPerson? person}) {
     // final ContactAbout myInfo = person.contactAbout;
     return Column(

@@ -7,8 +7,8 @@ import '../data/storage_provider.dart';
 
 class CardViewPeopleWidget extends StatelessWidget {
   const CardViewPeopleWidget(
-      {required this.deleteButton, required this.person});
-
+      {required this.deleteButton, required this.person, required this.index,   });
+final int index;
   final void Function()? deleteButton;
   final ListPerson person;
   
@@ -109,6 +109,16 @@ class CardViewPeopleWidget extends StatelessWidget {
                 );
               },
               icon: Icon(Icons.delete),
+            ),
+          ),
+             Positioned(
+            bottom: 0,
+            right: 0,
+            child: IconButton(
+              onPressed: () {
+                Get.toNamed("/editPerson",arguments: index);
+              },
+              icon: Icon(Icons.edit),
             ),
           ),
         ],

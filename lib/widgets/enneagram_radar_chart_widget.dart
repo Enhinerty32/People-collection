@@ -8,6 +8,11 @@ class EnneagramRadarChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+       if ( enneagramData == null ) {
+      return Center(child: Text("Tipo Eneagrama no encontrado"));
+    }
     final List<RadarEntry> listEnneagram = [
       RadarEntry(value: enneagramData.achiever),
       RadarEntry(value: enneagramData.challenger),

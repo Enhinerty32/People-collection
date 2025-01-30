@@ -204,7 +204,7 @@ class MenstrualCycle {
 class SleepPattern {
     DateTime wakeUp;
     DateTime sleepTime;
-    int sleepDuration;
+    double sleepDuration;
     DateTime energyPeak;
     DateTime tirednessPeak;
 
@@ -219,7 +219,7 @@ class SleepPattern {
     SleepPattern copyWith({
         DateTime? wakeUp,
         DateTime? sleepTime,
-        int? sleepDuration,
+        double? sleepDuration,
         DateTime? energyPeak,
         DateTime? tirednessPeak,
     }) => 

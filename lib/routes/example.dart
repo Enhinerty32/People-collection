@@ -1,4 +1,3 @@
- 
 import 'package:flutter/material.dart';
 import 'package:flutter_json_view/flutter_json_view.dart';
 import 'package:get/get.dart';
@@ -72,56 +71,48 @@ class EditPersonPage extends StatelessWidget {
     }
     if (myUser.listPeople.isNotEmpty) {
       thisController.listPerson.value = myUser.listPeople[index];
-      final ListPerson person = thisController.listPerson.value;
+      final  person = thisController.listPerson.value;
 
       // Asignar valores iniciales a los controladores
       thisController.setInitialValues(person);
+    
+
+ String? myValidartor(String? value) {
  
+  }
+
+     List<String> fields = [
+        "nickname",
+        "fullName",
+        "gender", 
+        "description",
+        "mail",
+        "workplace",
+        "diagnosis"
+        ];
+   
+
       return Column(
         children: [
-         _buildCategoryExpansionTile( "Datos Generales",Column(
-            children: [
-                TextFormFielListPeople(thisController, person,"nickname","Apodo"),
-                TextFormFielListPeople(thisController, person,"fullName","Nombre Completo "),
-                //edad
-                TextFormFielListPeople(thisController, person,"gender","Genero"),
-                //lvl de conexion
-                TextFormFielListPeople(thisController, person,"description","Descripcion"),
-                TextFormFielListPeople(thisController, person,"mail","Correo Electronico"),
-                //tipo de sangre
-                TextFormFielListPeople(thisController, person,"workplace","Lugar de Trabajo"),
-                //lugares registrados 
-                //Numeros de celular
-                //Lenguajes
-                //Historia personal
-                //Link de redes sociales
-                ]
-          ))
-          ,
-          _buildCategoryExpansionTile('Diagnostico',Column(
-            children: [
-              //Intereses Misticos
-              //Pasatiempos 
-              //Preferencias Musicales
-              //Intereses Cinematograficos
-              //Intereses Profundos 
-
-          ],)),
-          _buildCategoryExpansionTile('Datos Psicologicos',Column(
-            children: [
-                //Datos MBIT
-                //Datos de Enegrama
-
-          ],))
-          ,
-        _buildCategoryExpansionTile('Diagnostico',Column(
-          children: [
-              TextFormFielListPeople(thisController, person,"diagnosis","Diagnostico General"),
-              //Peso
-              //Condiciones diagnosticadas 
-              //Horario de sueño
-              ],)),
-
+          _buildCategoryExpansionTile("Datos Generales", 
+          Column(
+            children: [ 
+            textFormFieldMyEdit(thisController:thisController, fields:fields[0], userInfo: person.generalInformation.nickname,validartor: myValidartor,name:"Apodo" ),
+            textFormFieldMyEdit(thisController:thisController, fields:fields[1], userInfo: person.generalInformation.fullName,validartor: myValidartor,name:"Nombre Completo"),
+            textFormFieldMyEdit(thisController:thisController, fields:fields[2], userInfo: person.generalInformation.gender,validartor: myValidartor,name:"Genero"),
+            textFormFieldMyEdit(thisController:thisController, fields:fields[3], userInfo: person.generalInformation.description,validartor: myValidartor,name:"Descripcion" ),
+            textFormFieldMyEdit(thisController:thisController, fields:fields[4], userInfo: person.generalInformation.mail,validartor: myValidartor,name:"Correo Electronico"),
+            textFormFieldMyEdit(thisController:thisController, fields:fields[5], userInfo: person.generalInformation.workplace,validartor: myValidartor,name:"Lugar de trabajo" ),
+            ]  
+          ),),
+            _buildCategoryExpansionTile("Diagnostico", 
+          Column(
+            children: [ 
+            textFormFieldMyEdit(thisController:thisController, fields:fields[6], userInfo: person.diagnosedData.diagnosis,validartor: myValidartor,name:"Diagnostico General" ),
+            
+            ]  
+          ),),
+          
           JsonView.map(person.toJson()),
         ],
       );
@@ -130,16 +121,6 @@ class EditPersonPage extends StatelessWidget {
     }
   }
 
-  TextFormField TextFormFielListPeople(EditPersonPageController thisController, ListPerson person,String obj,String name) {
-    return TextFormField(
-              controller: thisController.textControllers[obj],
-              onChanged: (value) {
-                thisController.updatePersonField(person, obj, value);
-              },
-              decoration: InputDecoration(labelText: name),
-          );
-  }
-}
     Widget _buildCategoryExpansionTile(String title, Widget child) {
     return ExpansionTile(
       title: Text(title,style: TextStyle(color: Colors.cyanAccent),),
@@ -148,8 +129,30 @@ class EditPersonPage extends StatelessWidget {
   }
 
 
+  Widget textFormFieldMyEdit({required EditPersonPageController thisController, required  String fields, required  String userInfo, required  String name,  required String? validartor(String? value)}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+                controller: thisController.textControllers[fields],
+             
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText:name,
+          ),
+                onChanged: (value)async {
+                 
+   thisController.updateTextData(userInfo, value)   ;
+                },
+                validator:  validartor,
+               
+              ),
+    );
+  }
+ 
+}
+
 class EditPersonPageController extends GetxController {
-  final Rx<ListPerson> listPerson = ListPerson(
+   final Rx<ListPerson> listPerson = ListPerson(
     generalInformation: GeneralInformation(
       workplace: '',
       socialMedia: [],
@@ -216,41 +219,23 @@ class EditPersonPageController extends GetxController {
     "description": TextEditingController(),
     "mail": TextEditingController(),
     "workplace": TextEditingController(),
+    
     "diagnosis": TextEditingController(),
   };
 
-  void setInitialValues(ListPerson person) {
-    textControllers["nickname"]!.text = person.generalInformation.nickname;
+  void setInitialValues(ListPerson person) async{
     textControllers["fullName"]!.text = person.generalInformation.fullName;
-    textControllers["gender"]!.text = person.generalInformation.gender;
     textControllers["description"]!.text = person.generalInformation.description;
+    textControllers["nickname"]!.text = person.generalInformation.nickname;
     textControllers["mail"]!.text = person.generalInformation.mail;
+    textControllers["gender"]!.text = person.generalInformation.gender;
     textControllers["workplace"]!.text = person.generalInformation.workplace;
+    
     textControllers["diagnosis"]!.text = person.diagnosedData.diagnosis;
   }
-
-  void updatePersonField(ListPerson person, String field, String value) {
-    switch (field) {
-      case "nickname":  person.generalInformation.nickname = value;
-        break;
-      case "fullName":
-        person.generalInformation.fullName = value;
-        break;
-      case "gender":
-        person.generalInformation.gender = value;
-        break;
-      case "description":
-        person.generalInformation.description = value;
-        break;
-      case "mail":
-        person.generalInformation.mail = value;
-        break;
-      case "workplace":
-        person.generalInformation.workplace = value;
-        break;
-      case "diagnosis":
-        person.diagnosedData.diagnosis = value;
-        break;
-    }
-  }
+  
+Future <void> updateTextData(String userInfo ,value)async{
+    userInfo = value;
+}
+ 
 }

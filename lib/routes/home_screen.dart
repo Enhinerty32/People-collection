@@ -26,130 +26,104 @@ class HomeScreen extends StatelessWidget {
 
     final myUserVoid =
 UserModel(id: '', name: '', email: '', phone: '', listPeople: [
-  ListPerson(
-    generalInformation: GeneralInformation(
-      workplace: 'Oceanic Innovations Institute',
-      socialMedia: ['@deepsea_voyager', '@hydro_technologist'],
-      phones: ['+1 305 555 9876', '+44 20 7946 1234'],
-      personalHistory: [
-        PersonalHistory(
-          title: 'Expedición al Abismo Challenger',
-          history: 'Lideró un equipo de investigación en la fosa más profunda del océano (2026)'
-        ),
-        PersonalHistory(
-          title: 'Descubrimiento de criaturas bioluminiscentes',
-          history: 'Descubrió nuevas especies marinas adaptadas a la oscuridad total a más de 10,000 metros de profundidad'
-        )
-      ],
-      nickname: 'Tide',
-      mail: 'sea.researcher@oceanicinnovations.com',
-      languagesSpoken: ['Inglés', 'Francés', 'Lengua de Signos Submarina'],
-      gender: 'No binario',
-      fullName: 'Kai Oceanus Abyssal',
-      description: 'Investigador marino y líder en biotecnología acuática',
-      connectionLevel: 9,
-      closeRelationships: CloseRelationships(
-        enemies: ['Corporación DeepWell'],
-        family: ['Dr. Talia Abyss (madre)', 'Nautilus Deep (hermanx)'],
-        friends: ['Prof. Triton Wave', 'Captain Coral Reef']
-      ),
-      bloodType: 'O-',
-      birthDate: '1995-11-11',
-      locations: [
-        Location(
-          namePlace: 'Centro de Investigación Submarina Neptuno', 
-          description: 'Centro de estudios sobre vida marina y ecosistemas abisales', 
-          place: Place(lat: -22.9916, lng: -122.0002)  // Coordenadas cerca del Abismo Challenger
-        ),
-        Location(
-          namePlace: 'Laboratorio de Bioluminiscencia Profunda', 
-          description: 'Laboratorio flotante en el océano Pacífico para investigación biológica', 
-          place: Place(lat: -5.2500, lng: -80.5000)  // Coordinadas en el Océano Pacífico
-        )
-      ]
+ListPerson(
+  generalInformation: GeneralInformation(
+    workplace: '',
+    socialMedia: [],
+    phones: [],
+    personalHistory: [],
+    nickname: '',
+    mail: '',
+    languagesSpoken: [],
+    gender: '',
+    fullName: '',
+    description: '',
+    connectionLevel: 0,
+    closeRelationships: CloseRelationships(enemies: [], family: [], friends: []),
+    bloodType: '',
+    birthDate: '',
+    locations: []
+  ),
+  interests: Interests(
+    mysticalInterests: [],
+    hobbyAreas: [],
+    musicalPreferences: [],
+    cinematicThemes: [],
+    deepInterests: []
+  ),
+  touchSensitiveBody: TouchSensitiveBody(
+    neck: 0,
+    shoulder: 0,
+    chest: 0,
+    abdomen: 0,
+    elbow: 0,
+    arm: 0,
+    hands: 0,
+    thigh: 0,
+    knee: 0,
+    leg: 0,
+    feet: 0,
+    upperBack: 0,
+    lowerBack: 0,
+    glutes: 0,
+    ear: 0,
+    chin: 0,
+    forehead: 0,
+    cheek: 0,
+    hair: 0,
+    mouth: 0,
+    nose: 0
+  ),
+  psychologicalAnalysis: PsychologicalAnalysis(
+    mbti: '',
+    enneagram: Enneagram(
+      perfectionist: 0,
+      helper: 0,
+      achiever: 0,
+      individualist: 0,
+      investigator: 0,
+      loyalist: 0,
+      enthusiast: 0,
+      challenger: 0,
+      peacemaker: 0
     ),
-    
-    interests: Interests(
-      mysticalInterests: ['Energías de las corrientes oceánicas', 'Cultura marina ancestral'],
-      hobbyAreas: ['Fotografía subacuática', 'Estudio de géiseres hidrotermales'],
-      musicalPreferences: ['Música ambiental marina', 'Sonidos de ballenas'],
-      cinematicThemes: ['Cine documental de exploración marina', 'Películas sobre la vida en las profundidades'],
-      deepInterests: ['Ecología marina', 'Tecnologías para la preservación de los océanos']
+    bigFive: BigFive(
+      openness: [0],
+      conscientiousness: [0],
+      extraversion: [0],
+      agreeableness: [0],
+      neuroticism: [0]
+    )
+  ),
+  diagnosedData: DiagnosedData(
+    weight: 0,
+    sleepPattern: SleepPattern(
+      wakeUp: DateTime(2000, 1, 1),
+      sleepTime: DateTime(2000, 1, 1),
+      sleepDuration: 0,
+      energyPeak: DateTime(2000, 1, 1),
+      tirednessPeak: DateTime(2000, 1, 1)
     ),
-    
-    touchSensitiveBody: TouchSensitiveBody(
-      neck: 4,
-      shoulder: 3,
-      chest: 2,
-      abdomen: 4,
-      elbow: 2,
-      arm: 3,
-      hands: 6,  // Alta sensibilidad táctil por trabajo en ambientes acuáticos
-      thigh: 3,
-      knee: 4,   // Lesión en expedición submarina
-      leg: 4,
-      feet: 5,   // Adaptación al uso prolongado de aletas
-      upperBack: 2,
-      lowerBack: 3,
-      glutes: 2,
-      ear: 8,    // Alta sensibilidad auditiva en ambientes subacuáticos
-      chin: 1,
-      forehead: 3,
-      cheek: 4,
-      hair: 0,   // Cabeza afeitada para mejor ajuste de equipo
-      mouth: 5,
-      nose: 7    // Adaptación al olfato de compuestos marinos
-    ),
-    
-    psychologicalAnalysis: PsychologicalAnalysis(
-      mbti: 'INTP-A',
-      enneagram: Enneagram(
-        perfectionist: 7.5,
-        helper: 5.5,
-        achiever: 6.5,
-        individualist: 8,
-        investigator: 10,
-        loyalist: 3,
-        enthusiast: 4,
-        challenger: 6,
-        peacemaker: 5
-      ),
-      bigFive: BigFive(
-        openness: [93],
-        conscientiousness: [81],
-        extraversion: [42],
-        agreeableness: [67],
-        neuroticism: [27]
-      )
-    ),
-    
-    diagnosedData: DiagnosedData(
-      weight: 68,
-      sleepPattern: SleepPattern(
-        wakeUp: DateTime(2024, 4, 15, 6, 30),
-        sleepTime: DateTime(2024, 4, 15, 22, 0),
-        sleepDuration: 8,
-        energyPeak: DateTime(2024, 4, 15, 7, 30),
-        tirednessPeak: DateTime(2024, 4, 15, 15, 0)
-      ),
-      diagnosedConditions: ['Sensibilidad extrema al movimiento en agua', 'Estrés por privación de luz'],
-      diagnosis: 'Adaptación psicológica a entornos de oscuridad constante',
-      menstrualCycle: MenstrualCycle(
-        start: DateTime(2024, 4, 1),
-        bloodDuration: 6,
-        cycleLength: 30
-      )
+    diagnosedConditions: [],
+    diagnosis: '',
+    menstrualCycle: MenstrualCycle(
+      start: DateTime(2000, 1, 1),
+      bloodDuration: 0,
+      cycleLength: 0
     )
   )
+)
 ])
-
 ;
     final newPerson = myUserVoid.listPeople.first;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("Home Screen"),
+        title: const Text("People Colletion"),
+        actions: [IconButton(onPressed: (){
+          Get.toNamed('/chat');
+        }, icon:Icon(Icons.chat))],
       ),
       drawer: InfoDrawer(user: user, person: newPerson),
       body: SingleChildScrollView(
@@ -246,15 +220,19 @@ UserModel(id: '', name: '', email: '', phone: '', listPeople: [
               itemCount: myuser.listPeople.length,
               itemBuilder: (BuildContext context, int index) {
                 final ListPerson person = myuser.listPeople[index];
-                return CardViewPeopleWidget(
-                  
-                  person: person,
-                  deleteButton: () async {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 2.5),
+                  child: CardViewPeopleWidget(
+                    index: index,
                     
-                    myuser.listPeople.removeAt(index);
-                    storageProvider.updateModel(myuser);
-                    Get.back(); // Cerrar el diálogo sin confirmar
-                  },
+                    person: person,
+                    deleteButton: () async {
+                      
+                      myuser.listPeople.removeAt(index);
+                      storageProvider.updateModel(myuser);
+                      Get.back(); // Cerrar el diálogo sin confirmar
+                    },
+                  ),
                 );
               },
             ),

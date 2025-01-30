@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:people_collection/models/user_model.dart';
 import '../../Provider/settings_provider.dart';
+import '../age_calculator_widget.dart';
 
 class GeneralInformationWidget extends StatelessWidget {
   const GeneralInformationWidget({super.key, required this.person});
@@ -33,12 +34,13 @@ class GeneralInformationWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
+                
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 for (var entry in {
                   "Apodo": myInfo.nickname,
                   "Nombre": myInfo.fullName,
-                  "Edad": myInfo.birthDate,
+                  "Edad": calculateAge(myInfo.birthDate)  ,
                   "Género": myInfo.gender,
                   "Nivel de Conexión": myInfo.connectionLevel.toString()
                 }.entries)
@@ -54,6 +56,7 @@ class GeneralInformationWidget extends StatelessWidget {
   Widget _buildGeneralInfoSection(GeneralInformation myInfo) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+       
       children: [
         for (var entry in {
           "Descripción": myInfo.description,
@@ -73,7 +76,8 @@ class GeneralInformationWidget extends StatelessWidget {
   }
 
   Widget _buildInfoText(String label, String value) {
-    return Text("$label: ${value.isEmpty ? '--' : value}");
+    return textWidget("$label: ${value.isEmpty ? '--' : value}"
+    );
   }
 
   Widget _buildExpansionTile(String title, Widget child) {
@@ -89,8 +93,18 @@ class GeneralInformationWidget extends StatelessWidget {
       title: title,
        
       listItems: listItems,
-      itemBuilder: (context, item) => Text(item),
+      itemBuilder: (context, item) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        child: Text(item),
+      ),
     );
+  }
+ Widget textWidget(String text){
+return Padding(
+  padding:  EdgeInsets.symmetric(vertical:  6.0),
+  child: Text(text
+      ,style: TextStyle(fontSize: 15),),
+);
   }
 
   Widget _buildListPersonalHistorySection(String title, List<PersonalHistory> listItems) {
@@ -125,6 +139,7 @@ class GeneralInformationWidget extends StatelessWidget {
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+     
       children: [
          
         _buildExpansionTile(
@@ -155,8 +170,12 @@ class GeneralInformationWidget extends StatelessWidget {
           baseColor: Colors.blueGrey.shade600,
           expandedColor: Colors.black87,
           title: Text(place.namePlace),
+          
           children: [
-              Text(place.description),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Text(place.description),
+              ),
             TextButton(
               onPressed: () => Get.toNamed("/map", arguments: place.place),
               child: const Text("Ver en el mapa"),
