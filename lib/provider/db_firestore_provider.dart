@@ -1,4 +1,5 @@
 import 'dart:async';
+// ignore: depend_on_referenced_packages
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:people_colletion_riverpod/config/models/person_model.dart';
@@ -96,7 +97,7 @@ Future<void> updatePerson(Person updatedPerson) async {
 
   final batch = _firestore.batch();
   final personRef = _firestore.collection(peopleCollection).doc(updatedPerson.id); // Usar el ID existente
-  final userRef = _firestore.collection(usersCollection).doc(userId);
+ 
 
   // Actualizar la persona en la colección de personas
   batch.update(personRef, updatedPerson.toJson());

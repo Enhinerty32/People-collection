@@ -10,6 +10,7 @@ class LoginScreen extends ConsumerWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthFirebaseProvider authFirebaseProvider = AuthFirebaseProvider();
   final formsValidator = FormsValidatorServices();
+  // ignore: library_private_types_in_public_api
   final _ThisStyle thisStyle = _ThisStyle();
 
   LoginScreen({super.key});
@@ -81,6 +82,7 @@ class LoginScreen extends ConsumerWidget {
 
     if (result != null) {
       // Registro exitoso
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Usuario registrado con éxito')),
       );

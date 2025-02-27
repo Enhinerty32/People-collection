@@ -19,8 +19,9 @@ Future<String?> anyError(
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Este usuario ya esta registrado')),
       );
+    // ignore: unrelated_type_equality_checks
     } else if (error == String) {
-      print(error);
+      // print(error);
     }
     return null;
   }

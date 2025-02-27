@@ -8,7 +8,7 @@ class ExtrasWidget extends StatefulWidget {
   final Function(Extra extra) onExtraAdd; // Callback para agregar
   final Function(int index) onExtraDelete; // Callback para eliminar
 
-  ExtrasWidget({
+  const ExtrasWidget({super.key, 
     required this.extras,
     required this.onExtraUpdated,
     required this.onExtraAdd,
@@ -16,6 +16,7 @@ class ExtrasWidget extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _ExtrasWidgetState createState() => _ExtrasWidgetState();
 }
 
@@ -237,7 +238,10 @@ class _ExtrasWidgetState extends State<ExtrasWidget> {
 
 // Ejemplo de uso
 class ExampleScreen extends StatefulWidget {
+  const ExampleScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ExampleScreenState createState() => _ExampleScreenState();
 }
 

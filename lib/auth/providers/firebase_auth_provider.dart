@@ -1,5 +1,6 @@
 import 'package:people_colletion_riverpod/auth/providers/error_auth_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: depend_on_referenced_packages
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class AuthFirebaseProvider {
         "people": [],
       });
 
-      print('se creo credencial');
+      // print('se creo credencial');
       return userCredential.user;
 
       
@@ -40,7 +41,7 @@ class AuthFirebaseProvider {
     ErrorAuthProvider().anyError(
           error: "${e.message}", context: context);
 
-      print('No se creo credencial');
+      // print('No se creo credencial');
       return null;
     }
   }
@@ -69,7 +70,7 @@ class AuthFirebaseProvider {
       await auth.signOut();
       
     } catch (e) {
-      print(e);
+      // print(e);
     } 
   }
 
@@ -128,25 +129,25 @@ Future<void> deleteUser({required String email, required String password}) async
 
       // Reautentica al usuario con las credenciales proporcionadas
       await user.reauthenticateWithCredential(credential);
-      print('Iniciando la eliminación');
+      // print('Iniciando la eliminación');
 
       // Eliminar el documento del usuario de Firestore
       await firestore.doc(user.uid).delete();
-      print('Eliminación en Firestore exitosa');
+      // print('Eliminación en Firestore exitosa');
 
       // Eliminar la cuenta de Firebase Authentication
       await user.delete();
-      print('Eliminación en Authentication exitosa');
+      // print('Eliminación en Authentication exitosa');
       // Redirigir al usuario a la página de login
       
        
        
-      print('Usuario eliminado exitosamente');
+      // print('Usuario eliminado exitosamente');
     } else {
       print('No hay usuario autenticado');
     }
   } catch (e) {
-    print('Error en eliminar la cuenta: ${e.toString()}');
+    // print('Error en eliminar la cuenta: ${e.toString()}');
   }
 
 }

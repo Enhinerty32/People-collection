@@ -53,7 +53,7 @@ class ViewPersonScreen extends StatelessWidget {
                   children: [
                     Text('Descripción', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     SizedBox(height: 8),
-                    Text('${person.description}', style: TextStyle(fontSize: 16)),
+                    Text(person.description, style: TextStyle(fontSize: 16)),
                   ],
                 ),
               ),
@@ -68,7 +68,7 @@ class ViewPersonScreen extends StatelessWidget {
                   children: [
                     Text('Número de celular', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     SizedBox(height: 8),
-                    Text('${person.phone}', style: TextStyle(fontSize: 16)),
+                    Text(person.phone, style: TextStyle(fontSize: 16)),
                   ],
                 ),
               ),
@@ -148,7 +148,7 @@ String createProfileString(Person person) {
                       Text('Perfil Copiado:',
                         style: TextStyle(fontSize: 18)),
                       Text(
-                        '${person.nick}',
+                       person.nick,
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -174,7 +174,7 @@ String createProfileString(Person person) {
                     children: [
                       Text('Copiado:  '),
                       Text(
-                        '${social}',
+                        social,
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],

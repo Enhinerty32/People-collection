@@ -78,7 +78,7 @@ class CardPersonWidget extends ConsumerWidget {
                       context: context,
                       builder: (context) => AlertDialog(
                         title: Text('¿Está seguro de eliminarlo?'),
-                        content: Text('${person.nick}'),
+                        content: Text(person.nick),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
@@ -129,7 +129,7 @@ class CardPersonWidget extends ConsumerWidget {
   // Función para eliminar una persona
   void _deletePerson(WidgetRef ref, String? id) {
     if (id == null) {
-      print('No hay ID en la eliminación');
+      // print('No hay ID en la eliminación');
       return;
     }
     ref.read(peopledbProvider.notifier).removePerson(id);

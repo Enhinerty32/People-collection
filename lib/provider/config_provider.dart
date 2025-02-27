@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../auth/providers/0-providers_auth.dart';
 import '../config/models/person_model.dart';
 
 part 'config_provider.g.dart';
@@ -38,9 +37,9 @@ class EditPerson extends _$EditPerson {
       newSocialNet[where] = link;
 
       state = state.copyWith(socialNet: newSocialNet);
-      print(where);
+      // print(where);
     } else {
-      print('Posición fuera de rango');
+      // print('Posición fuera de rango');
     }
   }
 
@@ -56,7 +55,7 @@ class EditPerson extends _$EditPerson {
       // Actualizamos el estado usando copyWith
       state = state.copyWith(socialNet: newSocialNet);
     } else {
-      print('Posición fuera de rango');
+      // print('Posición fuera de rango');
     }
   }
 
@@ -96,9 +95,9 @@ class EditPerson extends _$EditPerson {
     newExtras[where] = extra;
     
     state = state.copyWith(extras: newExtras);
-    print('Actualizado extra en posición $where');
+    // print('Actualizado extra en posición $where');
   } else {
-    print('Posición fuera de rango');
+    // print('Posición fuera de rango');
   }
 }
 
@@ -113,9 +112,9 @@ void removeListExtra({required int where}) {
     
     // Actualizamos el estado usando copyWith
     state = state.copyWith(extras: newExtras);
-    print('Eliminado extra en posición $where');
+    // print('Eliminado extra en posición $where');
   } else {
-    print('Posición fuera de rango');
+    // print('Posición fuera de rango');
   }
 }
 
@@ -128,7 +127,7 @@ void addListExtra({required Extra extra}) {
   
   // Actualizamos el estado usando copyWith
   state = state.copyWith(extras: newExtras);
-  print('Agregado nuevo extra: ${extra.title}');
+  // print('Agregado nuevo extra: ${extra.title}');
 }
 }
 

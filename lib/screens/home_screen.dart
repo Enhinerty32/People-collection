@@ -57,7 +57,7 @@ class HomeScreen extends ConsumerWidget {
           itemCount: people.length + 1,
           itemBuilder: (context, index) {
             if (index == people.length) {
-              print("$index ${people.length}");
+              // print("$index ${people.length}");
               return SizedBox(height: 100);
             }
             return CardPersonWidget(person: people[index], );

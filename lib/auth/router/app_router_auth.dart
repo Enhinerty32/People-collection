@@ -1,8 +1,8 @@
 import 'package:people_colletion_riverpod/auth/screen/0-screens.dart';
 import 'package:people_colletion_riverpod/config/router/app_router.dart';
-import 'package:people_colletion_riverpod/provider/0-provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+// ignore: depend_on_referenced_packages
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 part 'app_router_auth.g.dart';

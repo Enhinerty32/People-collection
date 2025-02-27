@@ -1,18 +1,16 @@
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as dtp;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:people_colletion_riverpod/config/services/config_services.dart';
 import 'package:people_colletion_riverpod/provider/config_provider.dart';
-import 'package:people_colletion_riverpod/provider/db_firestore_provider.dart';
 import 'package:people_colletion_riverpod/provider/get_show_db_provider.dart';
 import 'package:people_colletion_riverpod/widgets/extras_widget.dart';
 import '../auth/providers/validartors_provider.dart';
 import '../config/models/person_model.dart';
-import '../widgets/socialNet_widget.dart';
+import '../widgets/social_net_widget.dart';
 
 class EditPersonScreen extends ConsumerWidget {
   EditPersonScreen({super.key, required this.person});
@@ -136,6 +134,7 @@ class EditPersonScreen extends ConsumerWidget {
         // Agrega aquí la lógica para guardar los cambios
         context.pop();
         ref.read(dbProviderProvider).updatePerson(viewPerson);
+         // ignore: unused_result
          ref.refresh(dbProviderProvider);
       },
       child: const Icon(Icons.save),
@@ -289,21 +288,7 @@ class EditPersonScreen extends ConsumerWidget {
       ),
     );
   }
-
-  Widget _buildTextFormFieldContent(String label, String value) {
-    final controller = TextEditingController(text: value);
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: padding),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-        ),
-      ),
-    );
-  }
-
+ 
   Widget _buildInfoRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.0),
@@ -318,28 +303,7 @@ class EditPersonScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildExtraItem(BuildContext context, Extra extra) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextButton(
-        style: TextButton.styleFrom(alignment: Alignment.centerLeft),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text(extra.title, maxLines: 4),
-              content: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Text(extra.description),
-              ),
-            ),
-          );
-        },
-        child: Text(extra.title, maxLines: 4),
-      ),
-    );
-  }
-
+ 
   void _showDatePicker(
       BuildContext context, WidgetRef ref, EditPerson editPersonNotifier) {
     dtp.DatePicker.showDatePicker(
@@ -350,9 +314,9 @@ class EditPersonScreen extends ConsumerWidget {
         backgroundColor: Colors.black,
         itemStyle: const TextStyle(color: Colors.white, fontSize: 18),
       ),
-      onChanged: (date) => print('change $date'),
+      
       onConfirm: (date) {
-        print('confirm $date');
+        // print('confirm $date');
         editPersonNotifier.changeBirthDate(date);
       },
       minTime: DateTime(1900, 1, 1),
@@ -411,6 +375,7 @@ class SexSelector extends ConsumerStatefulWidget {
   const SexSelector({required this.person, required this.title, super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SexSelectorState createState() => _SexSelectorState();
 }
 
